@@ -61,12 +61,7 @@ environments {
         // uri = new URI(System.env.DATABASE_URL?:"postgres://oweordgynxktyb:gl3R3CI87-PerzrOfb18_hUxpi@ec2-54-247-117-179.eu-west-1.compute.amazonaws.com:5432/dd85bs9egd9pmp")
 
         // url = "jdbc:postgresql://"+uri.host+uri.path
-        url = "jdbc:postgresql://ec2-54-247-117-179.eu-west-1.compute.amazonaws.com:5432/dd85bs9egd9pmp"
-
-        // username = uri.userInfo.split(":")[0]
-        username = "oweordgynxktyb"
-        // password = uri.userInfo.split(":")[1]
-        password = "gl3R3CI87-PerzrOfb18_hUxpi"
-    }
+        url = "jdbc:postgresql://oweordgynxktyb:gl3R3CI87-PerzrOfb18_hUxpi@ec2-54-247-117-179.eu-west-1.compute.amazonaws.com:5432/dd85bs9egd9pmp"
+        }
     }
 }
