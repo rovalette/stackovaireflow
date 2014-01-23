@@ -53,13 +53,16 @@ environments {
     }
 
     production {
-        // DEMO JNDI DATA SOURCE
         dataSource {
-            dialect = 'org.hibernate.dialect.MySQL5InnoDBDialect'
-            pooled = false
+        dbCreate = "update"
+        driverClassName = "org.postgresql.Driver"
+        dialect = org.hibernate.dialect.PostgreSQLDialect
 
-            dbCreate = 'create-drop' // WARNING! on production, should probably be 'update' or 'validate'
-            jndiName = 'java:comp/env/jdbc/mydb'
-        }
+        uri = new URI(System.env.DATABASE_URL?:"postgres://test:test@localhost/test")
+
+        url = "jdbc:postgresql://"+uri.host+uri.path
+        username = uri.userInfo.split(":")[0]
+        password = uri.userInfo.split(":")[1]
+    }
     }
 }
