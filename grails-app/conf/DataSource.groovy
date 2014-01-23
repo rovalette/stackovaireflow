@@ -14,10 +14,10 @@ environments {
     development {
         dataSource {
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-            driverClassName = "com.mysql.jdbc.Driver"
-            dialect = 'org.hibernate.dialect.MySQL5InnoDBDialect'
-            url = "jdbc:mysql://localhost:3306/stackover"
-            username = 'root'
+            driverClassName = "org.postgresql.Driver"
+            dialect = "org.hibernate.dialect.PostgreSQLDialect"
+            url = "jdbc:postgresql://localhost:5432/stackovaireflow"
+            username = 'postgres'
             password = 'root'
         }
     }
@@ -56,7 +56,7 @@ environments {
         dataSource {
         dbCreate = "update"
         driverClassName = "org.postgresql.Driver"
-        dialect = org.hibernate.dialect.PostgreSQLDialect
+        dialect = "org.hibernate.dialect.PostgreSQLDialect"
 
         // uri = new URI(System.env.DATABASE_URL?:"postgres://oweordgynxktyb:gl3R3CI87-PerzrOfb18_hUxpi@ec2-54-247-117-179.eu-west-1.compute.amazonaws.com:5432/dd85bs9egd9pmp")
 

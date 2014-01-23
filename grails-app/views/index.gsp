@@ -17,10 +17,11 @@
     <h1>Bienvenu sur steak d'ovaire</h1>
 
     <g:if test="${username}">
-        <g:link class="btn btn-default" role="button" controller="Author" action="displayEditAuthorInfo" params="[username: username]">Editer vos informations</g:link>
+        <g:link class="btn btn-primary" role="button" controller="Author" action="displayEditAuthorInfo" params="[username: username]">Editer vos informations</g:link>
     </g:if>
     <g:else>
         <g:link class="btn btn-default" role="button" controller="Author" action="index">Se connecter</g:link>
+        <g:link class="btn btn-primary" role="button" controller="Author" action="displayCreateAuthor">S'enregistrer</g:link>
     </g:else>
 
 </body>
