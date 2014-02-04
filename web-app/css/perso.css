@@ -1,0 +1,37 @@
+.right{
+    float: right;
+}
+
+.left{
+    float: left;
+}
+
+.dark{
+    background-color: #444;
+}
+
+.center{
+    margin:auto
+}
+
+#headband{
+    background-color: #444;
+    height: 10%;
+    min-height: 70px;
+}
+
+.pagetitle{
+    text-align: center;
+    vertical-align: baseline;
+}
+
+.content{
+    width:90%;
+    margin: auto;
+    background-color: #ffffff;
+    min-height: 70%;
+}
+
+body{
+    background-color: #aaaaaa;
+}

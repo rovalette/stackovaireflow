@@ -21,7 +21,7 @@
     <div class="control-group">
         <label class="control-label" for="username">Pseudo</label>
         <div class="controls">
-            <g:field type="text"  name="username" value="${author?.username}"/>
+            <g:field type="text"  name="username" value="${author?.username}" placeholder="Pseudo"/>
         </div>
     </div>
     <div class="control-group">

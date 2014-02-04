@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Bootstrap 101 Template</title>
+    <title>Steak Ovaire Flow</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="${resource(dir:'css/bootstrap', file:'bootstrap.css')}" rel="stylesheet" media="screen">
@@ -17,7 +17,7 @@
     <meta name="layout" content="top">
 </head>
 <body>
-<h1>Login</h1>
+<h1 class="pagetitle">Login</h1>
 
 <g:hasErrors bean="${answerInstance}">
     <ul class="errors" role="alert">

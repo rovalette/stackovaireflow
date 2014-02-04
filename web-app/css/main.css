@@ -28,6 +28,14 @@ html.no-cssgradients {
 	background-color: #aaa;
 }
 
+.right{
+    float: right;
+}
+
+.left{
+    float: left;
+}
+
 .ie6 html {
 	height: 100%;
 }

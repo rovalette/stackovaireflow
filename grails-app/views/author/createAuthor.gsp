@@ -8,14 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Register</title>
+    <title>Steak Ovaire Flow</title>
     <link href="${resource(dir:'css/bootstrap', file:'bootstrap.css')}" rel="stylesheet" type="text/css"/>
     <link href="${resource(dir:'js/bootstrap' , file:'bootstrap.js' )}" type="application/javascript"   />
     <meta name="layout" content="top">
 </head>
 
 <body>
-<h1>Register</h1>
+<h1 class="pagetitle">Register</h1>
 
 <g:hasErrors bean="${answerInstance}">
     <ul class="errors" role="alert">

@@ -6,7 +6,7 @@ class AuthorService {
     {
         if (userExists(author.username).equals(false))
         {
-            author.save()
+            author.save(flush: true)
             return true
         }
         return false
@@ -17,25 +17,31 @@ class AuthorService {
         return !Author.findAllByUsername(username).empty
     }
 
-    def Author editAuthorInfo(Author newAuthor)
+    def Boolean editAuthorInfo(Author newAuthor, Long uid)
     {
-        Author oldAuthor = Author.findByUsername(newAuthor.username)
-        oldAuthor.firstname = newAuthor.firstname
-        oldAuthor.lastname  = newAuthor.lastname
-        oldAuthor.email     = newAuthor.email
-        oldAuthor.save()
+        if (newAuthor.username != "" && newAuthor.firstname != "" && newAuthor.lastname != "" && newAuthor.email != "")
+        {
+            Author oldAuthor = Author.findById(uid)
+            oldAuthor.username  = newAuthor.username
+            oldAuthor.firstname = newAuthor.firstname
+            oldAuthor.lastname  = newAuthor.lastname
+            oldAuthor.email     = newAuthor.email
+            oldAuthor.save(flush: true)
+            return true;
+        }
+        return false;
     }
 
-    def Author changeAuthorPassword(String newPassword, String username)
+    def Author changeAuthorPassword(String newPassword, Long uid)
     {
-        Author author = Author.findByUsername(username)
+        Author author = Author.findById(uid)
         author.password = newPassword
-        author.save()
+        author.save(flush: true)
     }
 
-    def Author getAuthorByUsername(String username)
+    def Author getAuthorById(Long uid)
     {
-        return Author.findByUsername(username)
+        return Author.findById(uid)
     }
 
     def Author signIn(String username, String password)

@@ -5,21 +5,17 @@
 	<head>
 		<meta name="layout" content="top">
 		<g:set var="entityName" value="${message(code: 'question.label', default: 'Question')}" />
-		<title><g:message code="default.list.label" args="[entityName]" /></title>
+		<title>Steak Ovaire Flow</title>
 	</head>
 	<body>
-		<a href="#list-question" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
-		</div>
 		<div id="list-question" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
+
+			<h1 class="pagetitle"><g:message code="default.list.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
+            <g:if test="${questionInstanceTotal > 0}">
+
 			<table>
 				<thead>
 					<tr>
@@ -49,6 +45,10 @@
 			<div class="pagination-centered">
 				<g:paginate total="${questionInstanceTotal}" />
 			</div>
+            </g:if>
+            <g:else>
+                <span class="label label-default"><g:message code="question.noquestionyet" default="No question yet!"/></span>
+            </g:else>
 		</div>
 	</body>
 </html>

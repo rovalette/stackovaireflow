@@ -10,11 +10,6 @@ class AuthorController {
         render(view: 'login')
     }
 
-    def displayIndex()
-    {
-        render(view: '/index', model: [username: params.username])
-    }
-
     def displayCreateAuthor()
     {
         render(view:'createAuthor')
@@ -22,10 +17,16 @@ class AuthorController {
 
     def displayEditAuthorInfo()
     {
-        String username = params.username
-        Author author = authorService.getAuthorByUsername(username)
+        Long uid = session["UserId"]
 
-        render(view: 'editAuthorInfo', model: [author: author])
+        if(!session["UserId"])
+        {
+            render view:'/error'
+        }
+
+        Author author = authorService.getAuthorById(uid)
+
+        render view: 'editAuthorInfo', model: [author: author]
     }
 
     def createAuthor()
@@ -33,33 +34,55 @@ class AuthorController {
         Author author = new Author(firstname: params.firstname, lastname: params.lastname, email: params.email, username: params.username, password: params.password)
 
         if (authorService.createAuthor(author))
-            render(view: '/index', model: [username: author.username])
+        {
+            session["UserId"] = author.id
+            redirect controller: "question", action: 'list'
+        }
         else
+        {
             render(view: 'createAuthor', model: [author: author])
+        }
     }
 
     def editAuthorInfo()
     {
-        Author author = new Author(firstname: params.firstname, lastname: params.lastname, email: params.email, username: params.username)
+        Long uid = session["UserId"]
 
-        if (authorService.editAuthorInfo(author))
+        if(!uid)
         {
-            render(view: 'editAuthorInfo', model: [author: author])
+            render(view: 'error')
         }
-        render(view:'/index', model:[username: author.username])
+
+        Author newAuthor = new Author()
+        newAuthor.properties = params
+
+        if (!authorService.editAuthorInfo(newAuthor, uid))
+        {
+            render(view: 'editAuthorInfo', model: [author: newAuthor])
+        }
+        redirect controller:'question', action:'list'
+    }
+
+    def logout()
+    {
+        session.invalidate()
+        redirect controller: 'question', action: 'list'
     }
 
     def signIn()
     {
         def String username = params.username
         def String password = params.password
+        Author author;
 
-        Author author = authorService.signIn(username, password)
-
-        if (author == null)
+        if (username == "" || password == "" || (author = authorService.signIn(username, password)) == null)
         {
             render(view:'login', model: [username: username, password: password])
         }
-        render(view:'/index', model:[username: author.username])
+        else
+        {
+            session["UserId"] = author.id
+            redirect controller:'question', action:'list'
+        }
     }
 }
