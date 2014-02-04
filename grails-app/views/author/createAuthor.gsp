@@ -11,6 +11,7 @@
     <title>Register</title>
     <link href="${resource(dir:'css/bootstrap', file:'bootstrap.css')}" rel="stylesheet" type="text/css"/>
     <link href="${resource(dir:'js/bootstrap' , file:'bootstrap.js' )}" type="application/javascript"   />
+    <meta name="layout" content="top">
 </head>
 
 <body>

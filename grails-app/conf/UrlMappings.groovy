@@ -7,7 +7,8 @@ class UrlMappings {
 			}
 		}
 
-		"/"(view:"/index")
+		//"/"(view:"/index")
+        "/"(controller:"Question",action:"list")
 		"500"(view:'/error')
 	}
 

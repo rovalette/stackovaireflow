@@ -7,7 +7,7 @@ class Question {
 	String content
 	Date date
 	
-	static hasMany = [anwsers:Answer, comments:Comment, tags:Tag]
+	static hasMany = [answers:Answer, comments:Comment, tags:Tag]
 	static belongsTo = Tag
     
 	static constraints = {

@@ -12,8 +12,9 @@
     <title>Bootstrap 101 Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
-    <link href="${resource(dir:'css/bootstrap', file:'bootstrap.min.css')}" rel="stylesheet" media="screen">
+    <link href="${resource(dir:'css/bootstrap', file:'bootstrap.css')}" rel="stylesheet" media="screen">
     <link href="${resource(dir:'js/bootstrap', file:'bootstrap.js')}" type="application/javascript"/>
+    <meta name="layout" content="top">
 </head>
 <body>
 <h1>Login</h1>

@@ -10,8 +10,9 @@
 <head>
     <title>Editer vos informations</title>
     <!-- Bootstrap -->
-    <link href="${resource(dir:'css/bootstrap', file:'bootstrap.min.css')}" rel="stylesheet" media="screen">
+    <link href="${resource(dir:'css/bootstrap', file:'bootstrap.css')}" rel="stylesheet" media="screen">
     <link href="${resource(dir:'js/bootstrap', file:'bootstrap.js')}" type="application/javascript"/>
+    <meta name="layout" content="top">
 </head>
 
 <body>
