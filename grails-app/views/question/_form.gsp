@@ -7,7 +7,7 @@
 		<g:message code="question.title.label" default="Title" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="title" required="" value="${questionInstance?.title}"/>
+	<g:textField style="width:100%" name="title" required="" value="${questionInstance?.title}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: questionInstance, field: 'content', 'error')} required">
@@ -15,38 +15,37 @@
 		<g:message code="question.content.label" default="Content" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="content" required="" value="${questionInstance?.content}"/>
+	<g:textArea style="width:100%" name="content" required="" value="${questionInstance?.content}"/>
 </div>
 
+<g:if test="${questionInstance?.answers != null && questionInstance?.answers.isEmpty() == false}">
 <div class="fieldcontain ${hasErrors(bean: questionInstance, field: 'answers', 'error')} ">
-	<label for="answers">
 		<g:message code="question.answers.label" default="Answers" />
-		
-	</label>
 	
-<ul class="one-to-many">
-<g:each in="${questionInstance?.answers?}" var="a">
-    <li><g:link controller="answer" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="answer" action="create" params="['question.id': questionInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'answer.label', default: 'Answer')])}</g:link>
-</li>
-</ul>
+    <ul class="one-to-many">
+        <g:each in="${questionInstance?.answers?}" var="a">
+            <li><g:message style="width:100%">${a.author}</g:message></li>
+            <li><g:message style="width:100%">${a.content}</g:message></li>
+            <div class="comments">
+                <g:message code="question.comments.label" default="Comments" />
+                <g:each in="${a.comments}" var="c">
+                    <g:message style="width: 100%">${c.author}</g:message>
+                    <g:message style="width: 100%">${c.content}</g:message>
+                </g:each>
+            </div>
+        </g:each>
+    </ul>
 
 </div>
+</g:if>
 
 <div class="fieldcontain ${hasErrors(bean: questionInstance, field: 'comments', 'error')} ">
-	<label for="comments">
-		<g:message code="question.comments.label" default="Comments" />
-		
-	</label>
-	<g:select name="comments" from="${org.isima.stackover.Comment.list()}" multiple="multiple" optionKey="id" size="5" value="${questionInstance?.comments*.id}" class="many-to-many"/>
+
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: questionInstance, field: 'tags', 'error')} ">
 	<label for="tags">
 		<g:message code="question.tags.label" default="Tags" />
-		
 	</label>
 	
 </div>

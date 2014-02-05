@@ -8,47 +8,51 @@
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#show-question" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
-		</div>
 		<div id="show-question" class="content scaffold-show" role="main">
-			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
+			<h1 class="pagetitle"><g:message code="default.show.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<ol class="property-list question">
+			<ul class="property-list question">
 			
 				<g:if test="${questionInstance?.title}">
 				<li class="fieldcontain">
 					<span id="title-label" class="property-label"><g:message code="question.title.label" default="Title" /></span>
-					
-						<span class="property-value" aria-labelledby="title-label"><g:fieldValue bean="${questionInstance}" field="title"/></span>
-					
+					<span class="property-value" aria-labelledby="title-label"><g:fieldValue bean="${questionInstance}" field="title"/></span>
 				</li>
 				</g:if>
 			
 				<g:if test="${questionInstance?.content}">
 				<li class="fieldcontain">
 					<span id="content-label" class="property-label"><g:message code="question.content.label" default="Content" /></span>
-					
-						<span class="property-value" aria-labelledby="content-label"><g:fieldValue bean="${questionInstance}" field="content"/></span>
-					
+				    <span class="property-value" aria-labelledby="content-label"><g:fieldValue bean="${questionInstance}" field="content"/></span>
 				</li>
 				</g:if>
 			
-				<g:if test="${questionInstance?.answers}">
+				<g:if test="${questionInstance?.answers && questionInstance.answers.isEmpty() != true}">
 				<li class="fieldcontain">
 					<span id="anwsers-label" class="property-label"><g:message code="question.answers.label" default="Anwsers" /></span>
-					
-						<g:each in="${questionInstance.answers}" var="a">
-						<span class="property-value" aria-labelledby="answers-label"><g:link controller="answer" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
+                    <ul>
+                        <g:each in="${questionInstance.answers}" var="a">
+                            <li>
+                                <g:fieldValue bean="${a.author}" field="username"/>
+                                <g:fieldValue bean="${a}" field="content"/>
+                                <g:if test="${a?.comments}">
+                                    <div class="comments">
+                                        <span id="comment-label" class="property-label"><g:message code="answers.comments.label" default="Comments" /></span>
+                                        <ul>
+                                            <g:each in="$a?.comments" var="c">
+                                                <li>
+                                                    <g:fieldValue bean="${c.author}" field="username"/>
+                                                    <g:fieldValue bean="${c}" field="content"/>
+                                                </li>
+                                            </g:each>
+                                        </ul>
+                                    </div>
+                                </g:if>
+                            </li>
+                        </g:each>
+                    </ul>
 				</li>
 				</g:if>
 			
@@ -83,7 +87,7 @@
 				</li>
 				</g:if>
 			
-			</ol>
+			</ul>
 
             <g:link class="btn btn-primary" role="button" controller="Answer" action="create">Answer</g:link>
 
