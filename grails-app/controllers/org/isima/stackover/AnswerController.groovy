@@ -21,13 +21,17 @@ class AnswerController {
 
     def save() {
         def answerInstance = new Answer(params)
+        answerInstance.content = params.content
+        answerInstance.author = Author.get(session["UserId"])
+        answerInstance.date = new Date()
+        answerInstance.question = Question.findById(params.qid)
         if (!answerInstance.save(flush: true)) {
-            render(view: "create", model: [answerInstance: answerInstance])
+
             return
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'answer.label', default: 'Answer'), answerInstance.id])
-        redirect(action: "show", id: answerInstance.id)
+        render template: "/layouts/Template/answerTemplate", collection: answerInstance.question.answers.sort{it.date}, var: "a"
     }
 
     def show(Long id) {
@@ -44,7 +48,7 @@ class AnswerController {
     def edit(Long id) {
         def answerInstance = Answer.get(id)
         if (!answerInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'answer.label', default: 'Answer'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'answer.newansweradded', default: 'New answer added!')])
             redirect(action: "list")
             return
         }

@@ -10,10 +10,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title><g:layoutTitle default="StackOvaire"/></title>
+    <title>Steak Ovaire Flow</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap/bootstrap.css')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'perso.css')}" type="text/css">
+    <link rel="icon" type="image/png" href="${resource(dir:'images', file: 'favico.png')}" />
     <g:layoutHead />
     <r:layoutResources />
 </head>
@@ -37,6 +38,8 @@
 <g:layoutBody/>
 
 <g:javascript library="application"/>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="${resource(dir:"js/bootstrap", file:"bootstrap.min.js")}"></script>
 <r:layoutResources />
 </body>
 </html>

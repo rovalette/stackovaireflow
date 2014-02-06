@@ -35,3 +35,31 @@
 body{
     background-color: #aaaaaa;
 }
+
+.question{
+    list-style:none;
+}
+
+.questionContent{
+    border: 1px solid;
+}
+
+.answers{
+    border: 1px solid;
+    list-style:none;
+    background-color: #dddddd;
+}
+
+.answer{
+    border: 1px solid;
+    background-color: #eeeeee;
+}
+
+.comments{
+    border: 1px solid;
+    list-style:none;
+}
+
+.metadata{
+    font-weight: bold;
+}

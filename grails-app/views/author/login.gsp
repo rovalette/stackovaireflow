@@ -28,16 +28,22 @@
 </g:hasErrors>
 
 <g:form name="signIn" controller="Author" class="form-horizontal" action="signIn" method="post">
+    <g:if test="${flash.message}">
+        <div class="message alert alert-danger alert-dismissable" role="status">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            ${flash.message}
+        </div>
+    </g:if>
     <div class="control-group">
         <label class="control-label" for="username">Pseudo</label>
         <div class="controls">
-            <g:field type="text" name="username" value="${username}" placeholder="Pseudo"/>
+            <g:field type="text" name="username" required="" value="${username}" placeholder="Pseudo"/>
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="password">Mot de passe</label>
         <div class="controls">
-            <g:field type="password" name="password" value="${password}" placeholder="Password"/>
+            <g:field type="password" name="password" required="" value="${password}" placeholder="Password"/>
         </div>
     </div>
     <div class="control-group">

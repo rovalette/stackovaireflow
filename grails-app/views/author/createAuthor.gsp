@@ -26,34 +26,40 @@
 </g:hasErrors>
 
 <g:form name="createAuthor" controller="Author" class="form-horizontal" action="createAuthor" method="post">
+    <g:if test="${flash.message}">
+        <div class="message alert alert-danger alert-dismissable" role="status">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            ${flash.message}
+        </div>
+    </g:if>
     <div class="control-group">
         <label class="control-label" for="firstname">Prénom</label>
         <div class="controls">
-            <g:field type="text" name="firstname" value="${author?.firstname}" placeholder="Prénom"/>
+            <g:field type="text" name="firstname" required="" value="${author?.firstname}" placeholder="Prénom"/>
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="lastname">Nom</label>
         <div class="controls">
-            <g:field type="text" name="lastname" value="${author?.lastname}" placeholder="Nom"/>
+            <g:field type="text" name="lastname" required="" value="${author?.lastname}" placeholder="Nom"/>
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="email">Email</label>
         <div class="controls">
-            <g:field type="text" name="email" value="${author?.email}" placeholder="Email"/>
+            <g:field type="text" name="email" required="" value="${author?.email}" placeholder="Email"/>
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="username">Pseudo</label>
         <div class="controls">
-            <g:field type="text" name="username" value="${author?.username}" placeholder="Pseudo"/>
+            <g:field type="text" name="username" required="" value="${author?.username}" placeholder="Pseudo"/>
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="password">Mot de passe</label>
         <div class="controls">
-            <g:field type="password" name="password" value="${author?.password}" placeholder="Password"/>
+            <g:field type="password" name="password" required="" value="${author?.password}" placeholder="Password"/>
         </div>
     </div>
     <div class="control-group">

@@ -40,6 +40,7 @@ class AuthorController {
         }
         else
         {
+            flash.message = message(code: 'author.useralreadyexists', default: 'User already exists !')
             render(view: 'createAuthor', model: [author: author])
         }
     }
@@ -49,17 +50,14 @@ class AuthorController {
         Long uid = session["UserId"]
 
         if(!uid)
-        {
             render(view: 'error')
-        }
 
         Author newAuthor = new Author()
         newAuthor.properties = params
 
         if (!authorService.editAuthorInfo(newAuthor, uid))
-        {
             render(view: 'editAuthorInfo', model: [author: newAuthor])
-        }
+
         redirect controller:'question', action:'list'
     }
 
@@ -77,6 +75,7 @@ class AuthorController {
 
         if (username == "" || password == "" || (author = authorService.signIn(username, password)) == null)
         {
+            flash.message = message(code: 'author.invalideLoginOrPassword', default: 'Failed to log in')
             render(view:'login', model: [username: username, password: password])
         }
         else
