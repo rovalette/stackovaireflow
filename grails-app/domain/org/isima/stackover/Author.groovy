@@ -1,8 +1,5 @@
 package org.isima.stackover
 
-
-import org.codehaus.groovy.grails.scaffolding.view.ScaffoldedGroovyPageView;
-
 class Author {
 		
 	String firstname
@@ -11,9 +8,10 @@ class Author {
 	String username
     String password
 	
-	static hasMany = [questions:Question, answers:Answer, comments:Comment]
+	static hasMany = [questions:Question, answers:Answer, comments:Comment, votes:Vote]
 
     static constraints = {
 		username(blank:false)
+        password(blank:false)
     }
 }

@@ -1,7 +1,7 @@
 package org.isima.stackover
 
 
-class Question {	
+class Question extends Votable {
 	
 	String title
 	String content
