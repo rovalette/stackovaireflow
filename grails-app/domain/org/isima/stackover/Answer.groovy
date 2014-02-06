@@ -1,7 +1,7 @@
 package org.isima.stackover
 
 
-class Answer {
+class Answer extends Votable {
 	
 	String content
 	Date date
