@@ -45,6 +45,6 @@
     </li>
 </g:if>
 
-<g:if test="${edit?.equals(true)}">
+<g:if test="${edit?.equals(true) && session["UserId"].equals(questionInstance.author.id)}">
     <g:remoteLink action="startEdit" id="${questionInstance?.id}" update="questionDisplay"><g:message code="default.button.edit.label.done" default="Edit" /></g:remoteLink>
 </g:if>

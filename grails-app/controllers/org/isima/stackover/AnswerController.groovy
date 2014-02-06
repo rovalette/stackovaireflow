@@ -1,10 +1,13 @@
 package org.isima.stackover
 
+import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap
 import org.springframework.dao.DataIntegrityViolationException
 
 class AnswerController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+
+    def answerService
 
     def index() {
         redirect(action: "list", params: params)
@@ -20,17 +23,18 @@ class AnswerController {
     }
 
     def save() {
-        def answerInstance = new Answer(params)
-        answerInstance.content = params.content
+        Answer answerInstance = new Answer(params)
+        GrailsParameterMap parameters = params
+        Long qid = Long.parseLong(parameters.get("qid"))
         answerInstance.author = Author.get(session["UserId"])
-        answerInstance.date = new Date()
-        answerInstance.question = Question.findById(params.qid)
-        if (!answerInstance.save(flush: true)) {
 
+        if (!answerService.save(answerInstance, qid))
+        {
+            flash.message = message(code: 'answser.unabletosave', default: "unable to save answer")
+            redirect action: 'list'
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'answer.label', default: 'Answer'), answerInstance.id])
         render template: "/layouts/Template/answerTemplate", collection: answerInstance.question.answers.sort{it.date}, var: "a"
     }
 
@@ -46,7 +50,7 @@ class AnswerController {
     }
 
     def edit(Long id) {
-        def answerInstance = Answer.get(id)
+        def answerInstance = answerService.get(id)
         if (!answerInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'answer.newansweradded', default: 'New answer added!')])
             redirect(action: "list")
@@ -56,28 +60,13 @@ class AnswerController {
         [answerInstance: answerInstance]
     }
 
-    def update(Long id, Long version) {
-        def answerInstance = Answer.get(id)
-        if (!answerInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'answer.label', default: 'Answer'), id])
-            redirect(action: "list")
-            return
-        }
-
-        if (version != null) {
-            if (answerInstance.version > version) {
-                answerInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'answer.label', default: 'Answer')] as Object[],
-                          "Another user has updated this Answer while you were editing")
-                render(view: "edit", model: [answerInstance: answerInstance])
-                return
-            }
-        }
-
+    def update(Long id) {
+        Answer answerInstance = new Answer()
         answerInstance.properties = params
 
-        if (!answerInstance.save(flush: true)) {
-            render(view: "edit", model: [answerInstance: answerInstance])
+        if (!answerService.update(answerInstance)) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'answer.label', default: 'Answer'), id])
+            redirect(action: "list")
             return
         }
 
@@ -86,21 +75,15 @@ class AnswerController {
     }
 
     def delete(Long id) {
-        def answerInstance = Answer.get(id)
-        if (!answerInstance) {
+        if (!answerService.delete(id))
+        {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'answer.label', default: 'Answer'), id])
             redirect(action: "list")
             return
         }
 
-        try {
-            answerInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'answer.label', default: 'Answer'), id])
-            redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'answer.label', default: 'Answer'), id])
-            redirect(action: "show", id: id)
-        }
+        answerInstance.delete(flush: true)
+        flash.message = message(code: 'default.deleted.message', args: [message(code: 'answer.label', default: 'Answer'), id])
+        redirect(action: "list")
     }
 }
