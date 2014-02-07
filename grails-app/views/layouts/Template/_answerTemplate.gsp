@@ -9,7 +9,7 @@
     <g:fieldValue bean="${a}" field="content"/>
     <span class="metadata">
         <g:fieldValue bean="${a.author}" field="username"/>
-        <g:formatDate format="dd/MM/yyyy HH:ss" date="${a.date}"/>
+        <g:formatDate format="dd/MM/yyyy HH:mm" date="${a.date}"/>
     </span>
     <g:if test="${a?.comments}">
         <span id="comment-label" class="property-label"><g:message code="answers.comments.label" default="Comments" /></span>

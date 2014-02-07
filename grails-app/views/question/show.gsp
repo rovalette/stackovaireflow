@@ -30,21 +30,22 @@
                 <%--</g:if>--%>
                 </ul>
 
-            <g:formRemote name="submitNewAnswer" url="[controller: 'Answer', action: 'save']" update="answers" onComplete="jQuery('#newAnswer').empty()">
-                <input type="hidden" name="qid" value="${questionInstance?.id}" />
+            <g:if test="${session["UserId"]}">
+            <g:formRemote name="submitNewAnswer" url="[controller: 'Answer', action: 'save']" update="answers" onComplete="jQuery('#newAnswer').val('')">
+                <input type="hidden" id="qid" name="qid" value="${questionInstance.id}" />
                 <g:textArea style="width:100%; height:25%" id="newAnswer" name="content" required="" placeholder="Your answer"/>
                 <input type="submit" class="btn btn-primary" value="${message(code:"answer.create", default:"Answer this question")}" />
             </g:formRemote >
+            </g:if>
 
+            <g:if test="${questionInstance?.author?.equals(session["UserId"])}">
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${questionInstance?.id}" />
-                    <g:if test="${questionInstance?.author?.id.equals(session["UserId"])}">
-                        <g:actionSubmit class="btn btn-default" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                    </g:if>
-
+                    <g:actionSubmit class="btn btn-default" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
 			</g:form>
+            </g:if>
 		</div>
 	</body>
 </html>
