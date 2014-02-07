@@ -12,7 +12,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Steak Ovaire Flow</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap/bootstrap.css')}" type="text/css">
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap.css', plugin: 'twitter-bootstrap')}" type="text/css">
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap-theme.css', plugin: 'twitter-bootstrap')}" type="text/css">
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap-fixtaglib.css', plugin: 'twitter-bootstrap')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'perso.css')}" type="text/css">
     <link rel="icon" type="image/png" href="${resource(dir:'images', file: 'favico.png')}" />
     <g:layoutHead />
@@ -39,7 +41,18 @@
 
 <g:javascript library="application"/>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script src="${resource(dir:"js/bootstrap", file:"bootstrap.min.js")}"></script>
+<script src="${resource(dir:"js", file:"bootstrap-affix.js", plugin: 'twitter-bootstrap')}"></script>
+<script src="${resource(dir:"js", file:"bootstrap-alert.js", plugin: 'twitter-bootstrap')}"></script>
+<script src="${resource(dir:"js", file:"bootstrap-button.js", plugin: 'twitter-bootstrap')}"></script>
+<script src="${resource(dir:"js", file:"bootstrap-carousel.js", plugin: 'twitter-bootstrap')}"></script>
+<script src="${resource(dir:"js", file:"bootstrap-collapse.js", plugin: 'twitter-bootstrap')}"></script>
+<script src="${resource(dir:"js", file:"bootstrap-dropdown.js", plugin: 'twitter-bootstrap')}"></script>
+<script src="${resource(dir:"js", file:"bootstrap-modal.js", plugin: 'twitter-bootstrap')}"></script>
+<script src="${resource(dir:"js", file:"bootstrap-popover.js", plugin: 'twitter-bootstrap')}"></script>
+<script src="${resource(dir:"js", file:"bootstrap-scrollspy.js", plugin: 'twitter-bootstrap')}"></script>
+<script src="${resource(dir:"js", file:"bootstrap-tab.js", plugin: 'twitter-bootstrap')}"></script>
+<script src="${resource(dir:"js", file:"bootstrap-tooltip.js", plugin: 'twitter-bootstrap')}"></script>
+<script src="${resource(dir:"js", file:"bootstrap-transition.js", plugin: 'twitter-bootstrap')}"></script>
 <r:layoutResources />
 </body>
 </html>

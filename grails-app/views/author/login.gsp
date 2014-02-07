@@ -11,9 +11,6 @@
 <head>
     <title>Steak Ovaire Flow</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link href="${resource(dir:'css/bootstrap', file:'bootstrap.css')}" rel="stylesheet" media="screen">
-    <link href="${resource(dir:'js/bootstrap', file:'bootstrap.js')}" type="application/javascript"/>
     <meta name="layout" content="top">
 </head>
 <body>
@@ -34,32 +31,33 @@
             ${flash.message}
         </div>
     </g:if>
-    <div class="control-group">
-        <label class="control-label" for="username">Pseudo</label>
-        <div class="controls">
-            <g:field type="text" name="username" required="" value="${username}" placeholder="Pseudo"/>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="password">Mot de passe</label>
-        <div class="controls">
-            <g:field type="password" name="password" required="" value="${password}" placeholder="Password"/>
-        </div>
-    </div>
-    <div class="control-group">
-        <div class="controls">
-            <g:actionSubmit class="btn btn-primary" value="Se connecter" action="signIn"/>
-            <g:link class="btn btn-default" role="button" controller="author" action="displayIndex">Annuler</g:link>
-        </div>
-    </div>
-    <div class="control-group">
-        <div class="controls">
-            <g:link controller="Author" action="displayCreateAuthor">s'inscrire</g:link>
+    
+    <div class="content">
+        <div class="centerform">
+            <div class="input-group">
+                <span class="input-group-addon formlabel">Pseudo</span>
+                <div class="form-control">
+                    <g:field type="text" name="username" required="" value="${username}" placeholder="Pseudo"/>
+                </div>
+            </div>
+                
+            <div class="input-group">
+                <span class="input-group-addon formlabel">Mot de passe</span>
+                <div class="form-control">
+                    <g:field type="password" name="password" required="" value="${password}" placeholder="Password"/>
+                </div>
+            </div>
+                
+            <div class="btn-group">
+                <g:link class="btn btn-danger" role="button" controller="author" action="displayCreateAuthor">Sign Up for free</g:link>
+                <g:actionSubmit class="btn btn-primary" value="Se connecter" action="signIn"/>
+                <g:link class="btn btn-default" role="button" controller="author" action="displayIndex">Annuler</g:link>
+            </div>
+        
         </div>
     </div>
 </g:form>
 
 <script src="http://code.jquery.com/jquery.js"></script>
-<script src="/stackover/static/js/bootstrap.min.js"></script>
 </body>
 </html>

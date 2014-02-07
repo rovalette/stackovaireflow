@@ -14,6 +14,11 @@
     margin:auto
 }
 
+.centerform {
+    margin: auto;
+    width: 60%;
+}
+
 #headband{
     background-color: #444;
     height: 10%;
@@ -40,8 +45,20 @@ body{
     list-style:none;
 }
 
+.questionContainer{
+    display: inline-block;
+    border: 1px solid #0077FF;
+    width: 100%;
+}
+
+.voteContainer{
+    float: left;
+    display: inline-block;
+}
+
 .questionContent{
-    border: 1px solid;
+    padding-left: 10px;
+    display: inline-block;
 }
 
 .answers{
@@ -62,4 +79,23 @@ body{
 
 .metadata{
     font-weight: bold;
+}
+
+.controls > .radio:first-child,
+.controls > .checkbox:first-child {
+    padding-top: 5px;
+    *display: inline-block;
+    *padding-left: 20px;
+    margin-left: 180px;
+    *margin-left: 0;
+}
+
+.formlabel {
+    width: 30%;
+    padding-top: 5px;
+    text-align: right;
+}
+
+.input-group {
+    width: 100%;
 }

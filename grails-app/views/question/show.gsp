@@ -17,7 +17,7 @@
                 </div>
 			</g:if>
 			<ul class="property-list question">
-                <div id="questionDisplay" class="questionContent">
+                <div id="questionDisplay" class="questionContainer">
                     <g:render template="/layouts/Template/questionTemplate" bean="${questionInstance}" var="questionInstance" model="[edit:true]"/>
                 </div>
                 <%--<g:if test="${questionInstance?.answers && questionInstance.answers.isEmpty() != true}">--%>
