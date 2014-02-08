@@ -6,68 +6,62 @@ class CommentController {
 
     def commentService
 
-    def save() {
-        Object commentInstance;
-        Object isQuestion = params.get("isQuestion")
-        if(!isQuestion)
-        {
-            commentInstance = new CommentAnswer()
-        }
-        else
-        {
-            commentInstance = new CommentQuestion()
-        }
+    def saveAnswerComment()
+    {
+        CommentAnswer commentInstance = new CommentAnswer(params)
 
-        GrailsParameterMap parameters = params
-        commentInstance.content = parameters.content
-        Long objId = Long.parseLong(parameters.get("objId"))
+        Long answerId = Long.parseLong(params.objId)
 
-
-        if (!commentService.save(commentInstance, objId, session["UserId"]))
+        if (!commentService.saveAnswerComment(commentInstance, answerId, session["UserId"]))
         {
-            flash.message = message(code: 'comment.unabletosave', default: "unable to save comment")
-            redirect controller: "question", action: 'show', id: aid
             return
         }
 
-        Set<Comment> comments;
-
-        if (params.isQuestion == false)
-        {
-            comments = Answer.get(objId).comments
-        }
-        else
-        {
-            comments = Question.get(objId).comments
-        }
-
-        render template: "/comment/commentTemplate", collection: comments.sort{it.date}, var: "comment", model: [answerId: objId]
+        render template: "/comment/commentTemplate", collection: Answer.get(answerId).comments.sort{it.date}, var: "comment", model: [objId: answerId]
     }
 
-    def delete(Long id) {
-        GrailsParameterMap parameters = params;
-        Comment comment = commentService.get(id)
-        Object objectInstance
-        if (comment.instanceOf(CommentAnswer))
+    def saveQuestionComment() {
+        CommentQuestion commentInstance = new CommentQuestion(params)
+
+        Long questionId =(Long) params.get("objId")
+
+        if (!commentService.saveQuestionComment(commentInstance, questionId, session["UserId"]))
         {
-            objectInstance = Answer.get(Long.parseLong(params.get("objId")))
-        }
-        else
-        {
-            objectInstance = Question.get(Long.parse(params.get("objId")))
+            return
         }
 
-        objectInstance.comments.remove(comment)
+        render template: "/comment/commentTemplate", collection: Question.get(questionId).comments.sort{it.date}, var: "comment", model: [objId: questionId]
+    }
 
-        Set<Comment> comments = objectInstance.comments
+    def deleteAnswerComment(Long id) {
+        CommentAnswer comment = commentService.getCommentAnswer(id)
 
-        if (!commentService.delete(id))
+        Answer answer = Answer.get(params.objId)
+
+        answer.comments.remove(comment)
+
+        if (!commentService.deleteAnswerComment(id))
         {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'answer.label', default: 'Answer'), id])
             redirect(action: "list")
             return
         }
 
-        render template:"/comment/commentTemplate", collection: comments.sort{it.date}, var: "comment", model: [answerId: answerId]
+        render template:"/comment/commentTemplate", collection: answer.comments.sort{it.date}, var: "comment", model: [objId: answer.id]
+    }
+
+    def deleteQuestionComment(Long id) {
+        CommentQuestion comment = commentService.getCommentQuestion(id)
+
+        Question question = Question.get(params.objId)
+
+        question.comments.remove(comment)
+
+        if (!commentService.deleteQuestionComment(id))
+        {
+            return
+        }
+
+        render template:"/comment/commentTemplate", collection: question.comments.sort{it.date}, var: "comment", model: [objId: question.id]
     }
 }

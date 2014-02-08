@@ -9,7 +9,7 @@ class Question extends Votable {
     Author author
 
 	
-	static hasMany = [answers:Answer, comments:Comment, tags:Tag]
+	static hasMany = [answers:Answer, comments:CommentQuestion, tags:Tag]
 	static belongsTo = [Author]
 
 	static constraints = {

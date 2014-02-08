@@ -9,13 +9,9 @@ class CommentService {
         return Comment.get(id)
     }
 
-    def save(Comment commentInstance, Long objId, Long authorId) {
+    def saveQuestionComment(CommentQuestion commentInstance, Long objId, Long authorId) {
 
-        Object objectInstance
-        if (commentInstance.instanceof(CommentAnswer.class))
-            objectInstance = Answer.get(objId)
-        else
-            objectInstance = Question.get(objId)
+        Question questionInstance = Question.get(objId)
 
         Author author = Author.get(authorId)
 
@@ -25,24 +21,67 @@ class CommentService {
         if(!commentInstance.save(flush: true))
             return null
 
-        if (!objectInstance.comments)
-            objectInstance.comments = new ArrayList<Comment>()
+        if (!questionInstance.comments)
+            questionInstance.comments = new ArrayList<CommentQuestion>()
 
-        objectInstance.comments.add(commentInstance)
-        objectInstance.save(flush: true)
+        questionInstance.comments.add(commentInstance)
+        questionInstance.save(flush: true)
 
-        if (!author.comments)
-            author.comments = new ArrayList<Comment>()
+        if (!author.questionComments)
+            author.questionComments = new ArrayList<CommentQuestion>()
 
-        author.comments.add(commentInstance)
+        author.questionComments.add(commentInstance)
         author.save(flush: true)
 
         return commentInstance
     }
 
-    def delete(Long id)
+    def saveAnswerComment(CommentAnswer commentInstance, Long objId, Long authorId) {
+
+        Answer answerInstance = Answer.get(objId)
+
+        Author author = Author.get(authorId)
+
+        commentInstance.date = new Date()
+        commentInstance.author = author
+        commentInstance.answer = answerInstance
+
+        if(!commentInstance.save(flush: true))
+            return null
+
+        if (!answerInstance.comments)
+            answerInstance.comments = new ArrayList<CommentAnswer>()
+
+        answerInstance.comments.add(commentInstance)
+        answerInstance.save(flush: true)
+
+        if (!author.answerComments)
+            author.answerComments = new ArrayList<CommentAnswer>()
+
+        author.answerComments.add(commentInstance)
+        author.save(flush: true)
+
+        return commentInstance
+    }
+
+    def deleteQuestionComment(Long id)
     {
-        Comment comment = Comment.get(id)
+        CommentQuestion comment = CommentQuestion.get(id)
+        if (!comment)
+            return false
+
+        try{
+            comment.delete()
+            return true
+        }
+        catch(DataIntegrityViolationException e){
+            return false
+        }
+    }
+
+    def deleteAnswerComment(Long id)
+    {
+        CommentAnswer comment = CommentAnswer.get(id)
         if (!comment)
             return false
 

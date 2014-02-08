@@ -22,9 +22,8 @@
     </ul>
     <g:if test="${session["UserId"]}">
         <a onclick="$('#addComment${a.id}').show()"><g:message code="comments.add" default="Add comment"/></a>
-        <g:formRemote style="display:none" name="addComment${a.id}" url="[controller :'Comment', action:'save']" update="comments${a.id}" onComplete="jQuery('#addComment${a.id}').val='';jQuery('#addComment${a.id}').hide()">
-            <input type="hidden" id="objId" name="objId" value="${a.id}" />
-            <input type="hidden" id="isQuestion" name=isQuestion" value="false"/>
+        <g:formRemote style="display:none" name="addComment${a.id}" url="[controller :'Comment', action:'saveAnswerComment']" update="comments${a.id}" onComplete="jQuery('#addComment${a.id}').val='';jQuery('#addComment${a.id}').hide()">
+            <input type="hidden" id="objId" name="objId" value="${a.id}" />x
             <g:textArea style="width:100%; height:25%" id="newComment${a.id}" name="content" required="" placeholder="Your answer"/>
             <input type="submit" class="btn btn-primary" value="${message(code:"comment.create", default:"Leave this comment")}" />
         </g:formRemote>

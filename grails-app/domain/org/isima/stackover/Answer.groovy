@@ -7,7 +7,7 @@ class Answer extends Votable {
 	Date date
 	
 	static belongsTo = [question:Question, author:Author]
-	static hasMany = [comments:Comment]
+	static hasMany = [comments:CommentAnswer]
 	
     static constraints = {
 		author(blank:false)
