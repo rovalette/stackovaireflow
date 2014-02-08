@@ -6,10 +6,10 @@ import grails.test.mixin.*
 import org.junit.*
 
 /**
- * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
+ * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
  */
-@TestFor(Vote)
-class VoteTests {
+@TestFor(TagService)
+class TagServiceTests {
 
     void testSomething() {
         fail "Implement me"

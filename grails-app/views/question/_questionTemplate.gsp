@@ -28,7 +28,7 @@
     <li class="fieldcontain">
         <span id="tags-label" class="property-label"><g:message code="question.tags.label" default="Tags" /> : </span>
         <g:each in="${questionInstance.tags}" var="t">
-            <span class="property-value label label-info" aria-labelledby="tags-label"><g:fieldValue bean="${t}" field="name"/></span>
+            <g:link controller="tag" action="show" id="${t.id}"><span class="property-value label label-info" aria-labelledby="tags-label"><g:fieldValue bean="${t}" field="name"/></span></g:link>
         </g:each>
 
     </li>

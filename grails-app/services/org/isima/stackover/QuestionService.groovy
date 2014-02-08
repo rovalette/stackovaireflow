@@ -17,8 +17,10 @@ class QuestionService {
             if ((currentTag = Tag.findByName(tag)) == null)
             {
                 currentTag = new Tag(name: tag)
-                currentTag.save(flush: true)
+                currentTag.questions = new ArrayList<Question>()
             }
+            currentTag.questions.add(question)
+            currentTag.save(flush: true)
 
             question.tags.add(currentTag)
         }

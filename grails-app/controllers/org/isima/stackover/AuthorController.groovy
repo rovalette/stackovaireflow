@@ -29,6 +29,17 @@ class AuthorController {
         render view: 'editAuthorInfo', model: [author: author]
     }
 
+    def consult(){
+        Author author = authorService.getAuthorById(session["UserId"])
+
+        if(!author)
+        {
+            render view: "login"
+        }
+
+        [author: author]
+    }
+
     def createAuthor()
     {
         Author author = new Author(firstname: params.firstname, lastname: params.lastname, email: params.email, username: params.username, password: params.password)
@@ -50,7 +61,7 @@ class AuthorController {
         Long uid = session["UserId"]
 
         if(!uid)
-            render(view: 'error')
+            render(view: 'login')
 
         Author newAuthor = new Author()
         newAuthor.properties = params

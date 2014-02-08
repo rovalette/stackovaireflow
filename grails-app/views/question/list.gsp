@@ -5,46 +5,18 @@
 	<head>
 		<meta name="layout" content="top">
 		<g:set var="entityName" value="${message(code: 'question.label', default: 'Question')}" />
-		<title>Steak Ovaire Flow</title>
 	</head>
 	<body>
 		<div id="list-question" class="content scaffold-list" role="main">
 
 			<h1 class="pagetitle"><g:message code="default.list.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
-			</g:if>
-            <g:if test="${questionInstanceTotal > 0}">
 
-			<table>
-				<thead>
-					<tr>
-					
-						<g:sortableColumn property="title" title="${message(code: 'question.title.label', default: 'Title')}" />
-					
-						<g:sortableColumn property="content" title="${message(code: 'question.content.label', default: 'Content')}" />
-					
-						<g:sortableColumn property="date" title="${message(code: 'question.date.label', default: 'Date')}" />
-					
-					</tr>
-				</thead>
-				<tbody>
-				<g:each in="${questionInstanceList}" status="i" var="questionInstance">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
-						<td><g:link action="show" id="${questionInstance.id}">${fieldValue(bean: questionInstance, field: "title")}</g:link></td>
-					
-						<td>${fieldValue(bean: questionInstance, field: "content")}</td>
-					
-						<td><g:formatDate date="${questionInstance.date}" /></td>
-					
-					</tr>
-				</g:each>
-				</tbody>
-			</table>
-			<div class="pagination-centered">
-				<g:paginate total="${questionInstanceTotal}" />
-			</div>
+			<g:if test="${flash.message}">
+			    <div class="message" role="status">${flash.message}</div>
+			</g:if>
+
+            <g:if test="${questionInstanceTotal > 0}">
+                <g:render template="listQuestions" model="[questionInstanceList: questionInstanceList, questionInstanceTotal: questionInstanceTotal]"/>
             </g:if>
             <g:else>
                 <span class="label label-default"><g:message code="question.noquestionyet" default="No question yet!"/></span>

@@ -60,6 +60,29 @@ body{
     list-style:none;
 }
 
+.comment{
+    border: 1px solid;
+    background-color: #dddddd;
+}
+
 .metadata{
     font-weight: bold;
+}
+
+.nextLink{
+    padding-left: 10px;
+}
+
+.prevLink{
+    padding-right: 10px;
+}
+
+.step, .currentStep{
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.icon{
+    width: 17px;
+    height: 17px;
 }

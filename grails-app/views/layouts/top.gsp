@@ -23,10 +23,10 @@
 <div id="headband" class="nav-header">
     <h1 class="center" style="width: 300px">StackOvaire</h1>
     <g:link class="btn btn-default" role="button" controller="question" action="list"><g:message code="default.home.label"/></g:link>
-
+    <g:link class="btn btn-default" role="button" controller="tag" action="list"><g:message code="default.tags.label" default="Tags"/></g:link>
     <g:if test="${session["UserId"]}">
         <g:link class="btn btn-default" role="button" controller="question" action="create"><g:message code="question.askquestion" default="Ask Question"/></g:link>
-        <g:link class="btn btn-primary right" role="button" controller="Author" action="displayEditAuthorInfo"><g:message code="author.editprofile" default="Edit profile"/></g:link>
+        <g:link class="btn btn-primary right" role="button" controller="Author" action="consult"><g:message code="author.consultprofile" default="profil"/></g:link>
         <g:link class="btn btn-primary right" role="button" controller="Author" action="logout"><g:message code="author.logout" default="Log Out"/></g:link>
     </g:if>
     <g:else>

@@ -1,7 +1,6 @@
 package org.isima.stackover
 
 import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap
-import org.springframework.dao.DataIntegrityViolationException
 
 class AnswerController {
 
@@ -35,7 +34,7 @@ class AnswerController {
             return
         }
 
-        render template: "/layouts/Template/answerTemplate", collection: answerInstance.question.answers.sort{it.date}, var: "a"
+        render template: "/answer/answerTemplate", collection: answerInstance.question.answers.sort{it.date}, var: "a"
     }
 
     def show(Long id) {
@@ -75,6 +74,8 @@ class AnswerController {
     }
 
     def delete(Long id) {
+        Question questionInstance  = answerService.get(id).question
+
         if (!answerService.delete(id))
         {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'answer.label', default: 'Answer'), id])
@@ -82,8 +83,6 @@ class AnswerController {
             return
         }
 
-        answerInstance.delete(flush: true)
-        flash.message = message(code: 'default.deleted.message', args: [message(code: 'answer.label', default: 'Answer'), id])
-        redirect(action: "list")
+        render template:"/answer/answerTemplate", collection: questionInstance.answers.sort{it.date}, var: "a"
     }
 }

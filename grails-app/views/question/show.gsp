@@ -18,33 +18,31 @@
 			</g:if>
 			<ul class="property-list question">
                 <div id="questionDisplay" class="questionContent">
-                    <g:render template="/layouts/Template/questionTemplate" bean="${questionInstance}" var="questionInstance" model="[edit:true]"/>
+                    <g:render template="/question/questionTemplate" bean="${questionInstance}" var="questionInstance" model="[edit:true]"/>
                 </div>
-                <%--<g:if test="${questionInstance?.answers && questionInstance.answers.isEmpty() != true}">--%>
                     <li class="fieldcontain">
                         <span id="anwsers-label" class="property-label"><g:message code="question.answers.label" default="Anwsers" /></span>
                         <ul id="answers" class="answers">
-                            <g:render template="/layouts/Template/answerTemplate" collection="${questionInstance.answers.sort{it.date}}" var="a"/>
+                            <g:render template="/answer/answerTemplate" collection="${questionInstance.answers.sort{it.date}}" var="a"/>
                         </ul>
                     </li>
-                <%--</g:if>--%>
                 </ul>
 
             <g:if test="${session["UserId"]}">
-            <g:formRemote name="submitNewAnswer" url="[controller: 'Answer', action: 'save']" update="answers" onComplete="jQuery('#newAnswer').val('')">
-                <input type="hidden" id="qid" name="qid" value="${questionInstance.id}" />
-                <g:textArea style="width:100%; height:25%" id="newAnswer" name="content" required="" placeholder="Your answer"/>
-                <input type="submit" class="btn btn-primary" value="${message(code:"answer.create", default:"Answer this question")}" />
-            </g:formRemote >
+                <g:formRemote name="submitNewAnswer" url="[controller: 'Answer', action: 'save']" update="answers" onComplete="jQuery('#newAnswer').val('')">
+                    <input type="hidden" id="qid" name="qid" value="${questionInstance.id}" />
+                    <g:textArea style="width:100%; height:25%" id="newAnswer" name="content" required="" placeholder="Your answer"/>
+                    <input type="submit" class="btn btn-primary" value="${message(code:"answer.create", default:"Answer this question")}" />
+                </g:formRemote >
             </g:if>
 
-            <g:if test="${questionInstance?.author?.equals(session["UserId"])}">
-			<g:form>
-				<fieldset class="buttons">
-					<g:hiddenField name="id" value="${questionInstance?.id}" />
-                    <g:actionSubmit class="btn btn-default" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-				</fieldset>
-			</g:form>
+            <g:if test="${questionInstance?.author?.id.equals(session["UserId"])}">
+                <g:form>
+                    <fieldset class="buttons">
+                        <g:hiddenField name="id" value="${questionInstance?.id}" />
+                        <g:actionSubmit class="btn btn-default" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                    </fieldset>
+                </g:form>
             </g:if>
 		</div>
 	</body>

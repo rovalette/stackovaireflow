@@ -1,7 +1,5 @@
 package org.isima.stackover
 
-import org.springframework.dao.DataIntegrityViolationException
-
 class QuestionController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -18,12 +16,19 @@ class QuestionController {
     }
 
     def create() {
+        if (!session["UserId"])
+            redirect controller: 'author', action: 'index'
+
         [questionInstance: new Question(params)]
     }
 
     def save() {
         def questionInstance = new Question()
         questionInstance.properties = params
+
+        if (!session["UserId"])
+            redirect controller: 'author', action: 'index'
+
         questionInstance.author = Author.findById(session["UserId"])
 
         if (!questionService.save(questionInstance, params.tagList))
@@ -56,7 +61,7 @@ class QuestionController {
         if (!questionInstance)
             redirect action: "startEdit", id: questionInstance.id
 
-        render template:"/layouts/Template/questionTemplate", bean: questionInstance, var: "questionInstance", model: [edit:true]
+        render template:"/question/questionTemplate", bean: questionInstance, var: "questionInstance", model: [edit:true]
     }
 
     def show(Long id) {
@@ -76,5 +81,6 @@ class QuestionController {
             flash.message = message(code: 'question.unabletodelete', default: "Unable to delete ", args: [message(code: 'question.label', default: 'Question'), id])
             redirect(action: "list")
         }
+        render view:"list"
     }
 }

@@ -1,7 +1,9 @@
 package org.isima.stackover
 
+import org.codehaus.groovy.ast.InterfaceHelperClassNode
 
-class Comment {
+
+abstract class Comment {
 	
 	String content
 	Date date
