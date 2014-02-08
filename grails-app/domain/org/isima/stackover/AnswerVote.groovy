@@ -2,9 +2,13 @@ package org.isima.stackover
 
 class AnswerVote {
 
-    static belongsTo = [answer:Answer]
+    Boolean isPositive
+    Date date
+
+    static belongsTo = [answer:Answer, author:Author]
 
     static constraints = {
         answer(blank:false)
+        author(blank:false)
     }
 }
