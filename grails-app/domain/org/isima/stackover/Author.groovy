@@ -8,8 +8,7 @@ class Author {
 	String username
     String password
 	
-	static hasMany = [questions:Question, answers:Answer, answerComments:CommentAnswer, questionComments:CommentQuestion, votes:Vote]
-
+	static hasMany = [questions:Question, answers:Answer, answerComments:CommentAnswer, questionComments:CommentQuestion, questionVotes:QuestionVote, answerVotes:AnswerVote]
     static constraints = {
 		username(blank:false)
         password(blank:false)
