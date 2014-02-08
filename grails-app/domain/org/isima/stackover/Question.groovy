@@ -1,7 +1,7 @@
 package org.isima.stackover
 
 
-class Question extends Votable {
+class Question {
 	
 	String title
 	String content
@@ -9,7 +9,7 @@ class Question extends Votable {
     Author author
 
 	
-	static hasMany = [answers:Answer, comments:Comment, tags:Tag]
+	static hasMany = [answers:Answer, comments:Comment, tags:Tag, votes:QuestionVote]
 	static belongsTo = [Author]
 
 	static constraints = {

@@ -1,13 +1,13 @@
 package org.isima.stackover
 
 
-class Answer extends Votable {
+class Answer {
 	
 	String content
 	Date date
 	
 	static belongsTo = [question:Question, author:Author]
-	static hasMany = [comments:Comment]
+	static hasMany = [comments:Comment, votes:QuestionVote]
 	
     static constraints = {
 		author(blank:false)
