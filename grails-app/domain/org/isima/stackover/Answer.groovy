@@ -8,7 +8,8 @@ class Answer {
     int score = 0
 	
 	static belongsTo = [question:Question, author:Author]
-	static hasMany = [comments:CommentAnswer, votes:AnswerVote]	
+	static hasMany = [comments:CommentAnswer, votes:AnswerVote]
+
     static constraints = {
 		author(blank:false)
 		question(blank:false)

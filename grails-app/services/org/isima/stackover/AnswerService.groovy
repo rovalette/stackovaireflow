@@ -43,6 +43,8 @@ class AnswerService {
         }
 
         try {
+            for(CommentAnswer c : answerInstance.comments)
+                c.delete()
             answerInstance.delete(flush: true)
             return true
         }

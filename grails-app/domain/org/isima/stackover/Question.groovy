@@ -6,9 +6,9 @@ class Question {
 	String title
 	String content
 	Date date
-    Author author
+
 	static hasMany = [answers:Answer, comments:CommentQuestion, tags:Tag, votes:QuestionVote]
-    static belongsTo = [Author]
+    static belongsTo = [author:Author]
 
 	static constraints = {
 		title(blank:false)

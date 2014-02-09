@@ -4,9 +4,14 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class CommentService {
 
-    def get(Long id)
+    def getCommentAnswer(Long id)
     {
-        return Comment.get(id)
+        return CommentAnswer.get(id)
+    }
+
+    def getCommentQuestion(Long id)
+    {
+        return CommentQuestion.get(id)
     }
 
     def saveQuestionComment(CommentQuestion commentInstance, Long objId, Long authorId) {
