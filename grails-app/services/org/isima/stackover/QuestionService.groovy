@@ -80,4 +80,15 @@ class QuestionService {
             return false
         }
     }
+
+    def getScore(Question q)
+    {
+        int score = 0
+        for (QuestionVote v : q.votes)
+        {
+            score += (v.isPositive?1:-1)
+        }
+
+        return score
+    }
 }

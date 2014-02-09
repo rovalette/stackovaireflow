@@ -6,6 +6,11 @@
 --%>
 
 <li class="answer">
+    <div class="left" style="width: 75px">
+        <g:remoteLink controller="Vote" action="addAnswerVote" id="${a.id}" params="[isPositive:true]" update="score${a.id}"> <span class="glyphicon glyphicon-thumbs-up"></span></g:remoteLink>
+        <div id="score${a.id}" class="score">${a.score}</div>
+        <g:remoteLink controller="Vote" action="addAnswerVote" id="${a.id}" params="[isPositive:false]" update="score${a.id}"><span class="glyphicon glyphicon-thumbs-down"></span></g:remoteLink>
+    </div>
     <g:if test="${session["UserId"] == a?.author?.id}">
         <div class="icon left">
             <g:remoteLink controller="answer" action="delete" id="${a.id}" update="answers"><img src="${resource(dir:'images', file:'delete.png')}"/></g:remoteLink>

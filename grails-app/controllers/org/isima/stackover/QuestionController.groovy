@@ -72,7 +72,7 @@ class QuestionController {
             return
         }
 
-        [questionInstance: questionInstance]
+        [questionInstance: questionInstance, score:questionService.getScore(questionInstance)]
     }
 
     def delete(Long id) {
