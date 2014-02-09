@@ -52,4 +52,11 @@ class AnswerService {
             return false
         }
     }
+
+    def updateScore(Answer a, AnswerVote v)
+    {
+        a.score += (v.isPositive?1:-1)
+        a.save(flush: true)
+        return
+    }
 }

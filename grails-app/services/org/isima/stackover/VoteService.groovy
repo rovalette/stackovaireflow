@@ -2,7 +2,11 @@ package org.isima.stackover
 
 class VoteService {
 
-    def serviceMethod() {
+    def saveQuestionVote(QuestionVote v) {
+        v.save(flush:true)
+    }
 
+    def saveAnswerVote(AnswerVote v) {
+        v.save(flush: true)
     }
 }

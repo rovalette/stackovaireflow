@@ -16,14 +16,20 @@
 			        ${flash.message}
                 </div>
 			</g:if>
+
 			<ul class="property-list question">
                 <div id="questionDisplay" class="questionContent">
+                    <div class="left" style="width: 75px">
+                        <g:remoteLink controller="Vote" action="addQuestionVote" id="${questionInstance.id}" params="[isPositive:true]" update="score"> <span class="glyphicon glyphicon-thumbs-up"></span></g:remoteLink>
+                        <div id="score" class="score">${score}</div>
+                        <g:remoteLink controller="Vote" action="addQuestionVote" id="${questionInstance.id}" params="[isPositive:false]" update="score"><span class="glyphicon glyphicon-thumbs-down"></span></g:remoteLink>
+                    </div>
                     <g:render template="/question/questionTemplate" bean="${questionInstance}" var="questionInstance" model="[edit:true]"/>
                 </div>
                 <li class="fieldcontain">
                     <span id="anwsers-label" class="property-label"><g:message code="question.answers.label" default="Anwsers" /></span>
                     <ul id="answers" class="answers">
-                        <g:render template="/answer/answerTemplate" collection="${questionInstance.answers.sort{it.date}}" var="a"/>
+                        <g:render template="/answer/answerTemplate" collection="${questionInstance.answers.sort{it.date}}" var="a" />
                     </ul>
                 </li>
             </ul>
