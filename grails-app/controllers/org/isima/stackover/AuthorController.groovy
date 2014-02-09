@@ -1,5 +1,8 @@
 package org.isima.stackover
 
+import org.bouncycastle.jce.provider.JCEKeyGenerator
+import org.codehaus.groovy.grails.plugins.codecs.SHA256Codec
+
 
 class AuthorController {
 
@@ -54,6 +57,29 @@ class AuthorController {
             flash.message = message(code: 'author.useralreadyexists', default: 'User already exists !')
             render(view: 'createAuthor', model: [author: author])
         }
+    }
+
+    def displayChangePassword()
+    {
+        if(!session["UserId"])
+        {
+            render view: 'login'
+        }
+        render view: 'changePassword'
+    }
+
+    def changePassword()
+    {
+        String oldPassword = params.oldPassword
+        String newPassword = params.newPassword
+
+        if (!authorService.changeAuthorPassword(newPassword, oldPassword, session["UserId"]))
+        {
+            flash.message = message(code: 'author.wrongpassword', default: "Bad password")
+            render view: "displayChangePassword"
+        }
+
+        redirect action: "consult"
     }
 
     def editAuthorInfo()

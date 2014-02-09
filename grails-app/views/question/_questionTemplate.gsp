@@ -45,6 +45,11 @@
     </li>
 </g:if>
 
-<g:if test="${edit?.equals(true)}">
-    <g:remoteLink action="startEdit" id="${questionInstance?.id}" update="questionDisplay"><g:message code="default.button.edit.label.done" default="Edit" /></g:remoteLink>
+<g:if test="${edit?.equals(true) && session["UserId"]}">
+    <g:remoteLink action="startEdit" id="${questionInstance?.id}" update="questionDisplay">
+        <button type="button" class="btn btn-default btn-xs">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <g:message code="default.button.edit.label"/>
+        </button>
+    </g:remoteLink>
 </g:if>

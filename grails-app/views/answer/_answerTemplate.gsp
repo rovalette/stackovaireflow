@@ -5,10 +5,10 @@
   Time: 13:51
 --%>
 
-<li class="answer">
+<li id="answer${a.id}" class="answer">
     <g:if test="${session["UserId"] == a?.author?.id}">
         <div class="icon left">
-            <g:remoteLink controller="answer" action="delete" id="${a.id}" update="answers"><img src="${resource(dir:'images', file:'delete.png')}"/></g:remoteLink>
+            <g:remoteLink controller="answer" action="delete" id="${a.id}" update="answers"><span class="glyphicon glyphicon-remove"></span></g:remoteLink>
         </div>
     </g:if>
     <g:fieldValue bean="${a}" field="content"/>
@@ -27,5 +27,13 @@
             <g:textArea style="width:100%; height:25%" id="newComment${a.id}" name="content" required="" placeholder="Your answer"/>
             <input type="submit" class="btn btn-primary" value="${message(code:"comment.create", default:"Leave this comment")}" />
         </g:formRemote>
+    </g:if>
+    <g:if test="${edit?.equals(true) && session["UserId"]}">
+        <g:remoteLink action="startEdit" id="${a?.id}" update="answer${a.id}">
+            <button type="button" class="btn btn-default btn-xs">
+                <span class="glyphicon glyphicon-pencil"></span>
+                <g:message code="default.button.edit.label"/>
+            </button>
+        </g:remoteLink>
     </g:if>
 </li>

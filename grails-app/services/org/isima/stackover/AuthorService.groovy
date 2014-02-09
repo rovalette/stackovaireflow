@@ -1,11 +1,15 @@
 package org.isima.stackover
 
+import cr.co.arquetipos.password.PasswordTools
+
 class AuthorService {
 
     def Boolean createAuthor(Author author)
     {
         if (userExists(author.username).equals(false))
         {
+            author.password = PasswordTools.saltPasswordBase64(author.password)
+
             author.save(flush: true)
             return true
         }
@@ -32,11 +36,17 @@ class AuthorService {
         return false;
     }
 
-    def Author changeAuthorPassword(String newPassword, Long uid)
+    def Author changeAuthorPassword(String newPassword, String oldPassword, Long uid)
     {
         Author author = Author.findById(uid)
+        if (!PasswordTools.checkDigestBase64(oldPassword, author.password))
+        {
+            return null
+        }
+        newPassword = PasswordTools.saltPasswordBase64(newPassword)
         author.password = newPassword
         author.save(flush: true)
+
     }
 
     def Author getAuthorById(Long uid)
@@ -46,6 +56,9 @@ class AuthorService {
 
     def Author signIn(String username, String password)
     {
-        return Author.findByUsernameAndPassword(username, password)
+        Author user = Author.findByUsername(username)
+        if (PasswordTools.checkDigestBase64(password, user.password))
+            return user
+        return null
     }
 }

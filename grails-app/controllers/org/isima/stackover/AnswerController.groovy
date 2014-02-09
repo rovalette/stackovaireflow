@@ -85,4 +85,24 @@ class AnswerController {
 
         render template:"/answer/answerTemplate", collection: questionInstance.answers.sort{it.date}, var: "a"
     }
+
+    def startEdit()
+    {
+        Answer answerInstance = Answer.get(params.id)
+        render template: "/answer/form", bean: answerInstance, var: "a"
+    }
+
+    def endEdit()
+    {
+        Answer answerInstance = Answer.get(params.id)
+        answerInstance.properties = params
+
+
+        answerInstance = answerService.update(answerInstance.id, answerInstance)
+
+        if (!answerInstance)
+            redirect action: "startEdit", id: answerInstance.id
+
+        render template:"/answer/answerTemplate", bean: answerInstance, var: "a"
+    }
 }
