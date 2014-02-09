@@ -35,7 +35,7 @@
             </div>
 
             <div class="tab-pane" id="commentsTab">
-                <g:if test="${author?.comments?.empty}">
+                <g:if test="${author?.answerComments?.empty && author?.questionComments?.empty}">
                     <span class="label label-warning"><g:message code="question.nocommentyet" default="No comment yet!"/></span>
                 </g:if>
                 <g:else>
@@ -47,10 +47,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <g:each in="${author?.comments}" status="i" var="comment">
+                            <g:each in="${author?.answerComments}" status="i" var="comment">
                                 <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                                     <td>${fieldValue(bean: comment, field: "content")}</td>
                                     <td><g:formatDate format="dd/MM/yyyy HH:mm" date="${comment.date}"/></td>
+                                    <td><g:link controller="question" action="show" id="${comment.answer.question.id}"><span class="btn btn-link"><g:message code="answer.gotoquestion" default="Go to it"/></span></g:link></td>
+                                </tr>
+                            </g:each>
+                            <g:each in="${author?.questionComments}" status="i" var="comment">
+                                <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+                                    <td>${fieldValue(bean: comment, field: "content")}</td>
+                                    <td><g:formatDate format="dd/MM/yyyy HH:mm" date="${comment.date}"/></td>
+                                    <td><g:link controller="question" action="show" id="${comment.question.id}"><span class="btn btn-link"><g:message code="answer.gotoquestion" default="Go to it"/></span></g:link></td>
                                 </tr>
                             </g:each>
                         </tbody>

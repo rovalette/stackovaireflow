@@ -2,7 +2,9 @@
     <g:if test="${comment?.author?.id == session["UserId"] && objId}">
         <div class="icon left">
             <g:if test="${isQuestion}">
-                <g:remoteLink controller="comment" action="deleteQuestionComment" id="${comment?.id}" params="[objId: objId]" update="commentsQuestion${objId}"><img src="${resource(dir: "/images", file: 'delete.png')}"/></g:remoteLink>
+                <div class="icon left">
+                    <g:remoteLink controller="comment" action="deleteQuestionComment" id="${comment?.id}" params="[objId: objId]" update="commentsQuestion${objId}"><img src="${resource(dir: "/images", file: 'delete.png')}"/></g:remoteLink>
+                </div>
             </g:if>
             <g:else>
                 <g:remoteLink controller="comment" action="deleteAnswerComment" id="${comment?.id}" params="[objId: objId]" update="commentsAnswer${objId}"><img src="${resource(dir: "/images", file: 'delete.png')}"/></g:remoteLink>

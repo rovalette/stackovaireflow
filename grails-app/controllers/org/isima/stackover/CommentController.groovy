@@ -1,7 +1,5 @@
 package org.isima.stackover
 
-import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap
-
 class CommentController {
 
     def commentService
