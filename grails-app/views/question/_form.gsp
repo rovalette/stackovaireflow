@@ -17,11 +17,7 @@
                 <g:message code="question.content.label" default="Content" />
                 <span class="required-indicator">*</span>
             </label>
-            <g:textArea style="width:100%; height:25%" name="content" required="" value="${questionInstance?.content}"/>
-        </div>
-
-        <div class="fieldcontain ${hasErrors(bean: questionInstance, field: 'comments', 'error')} ">
-
+            <g:textArea name="content" required="" value="${questionInstance?.content}"/>
         </div>
 
         <div class="fieldcontain ${hasErrors(bean: questionInstance, field: 'tags', 'error')} ">
@@ -30,7 +26,7 @@
             </label>
             <g:textField style="width: 100%" name="tagList" id="tagList" value="${tagList}"/>
         </div>
-        <input type="submit" class="btn btn-primary" value="${message(code:"question.validateEdit", default:"Validate edition")}" />
+        <input type="submit" class="btn btn-primary" value="${message(code:"question.endedit", default:"End edition")}" />
     </g:formRemote>
 </g:if>
 <g:else>
@@ -47,7 +43,7 @@
             <g:message code="question.content.label" default="Content" />
             <span class="required-indicator">*</span>
         </label>
-        <g:textArea style="width:100%; height:25%" name="content" required="" value="${questionInstance?.content}"/>
+        <g:textArea name="content" required="" value="${questionInstance?.content}"/>
     </div>
 
     <div class="fieldcontain ${hasErrors(bean: questionInstance, field: 'comments', 'error')} ">

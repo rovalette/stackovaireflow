@@ -1,5 +1,7 @@
 package org.isima.stackover
 
+import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap
+
 class CommentController {
 
     def commentService
@@ -19,13 +21,16 @@ class CommentController {
     }
 
     def saveQuestionComment() {
-        CommentQuestion commentInstance = new CommentQuestion(params)
-
-        Long questionId =(Long) params.get("objId")
-
-        if (!commentService.saveQuestionComment(commentInstance, questionId, session["UserId"]))
+        if (!params.cancel)
         {
-            return
+            CommentQuestion commentInstance = new CommentQuestion(params)
+
+            Long questionId =(Long) params.get("objId")
+
+            if (!commentService.saveQuestionComment(commentInstance, questionId, session["UserId"]))
+            {
+                return
+            }
         }
 
         render template: "/comment/commentTemplate", collection: Question.get(questionId).comments.sort{it.date}, var: "comment", model: [objId: questionId]
@@ -61,5 +66,45 @@ class CommentController {
         }
 
         render template:"/comment/commentTemplate", collection: question.comments.sort{it.date}, var: "comment", model: [objId: question.id]
+    }
+
+    def startEditQuestionComment()
+    {
+        CommentQuestion comment = CommentQuestion.get(params.id)
+        render template: "/answer/form", bean: comment, var: "a",  model:[objId:params.objId]
+    }
+
+    def endEditQuestionComment()
+    {
+        CommentQuestion comment = CommentQuestion.get(params.id)
+        comment.properties = params
+
+
+        comment = commentService.updateQuestionComment(comment.id, comment)
+
+        if (!comment)
+            redirect action: "startEdit", id: comment.id, model:[objId:params.objId]
+
+        render template:"/comment/commentTemplate", bean: comment, var: "comment", model:[objId:params.objId]
+    }
+
+    def startEditAnswerComment()
+    {
+        CommentAnswer comment = CommentAnswer.get(params.id)
+        render template: "/comment/form", bean: comment, var: "comment",  model:[objId: params.objId]
+    }
+
+    def endEditAnswerComment()
+    {
+        CommentAnswer comment = CommentAnswer.get(params.id)
+        comment.properties = params
+
+
+        comment = commentService.updateAnswerComment(comment.id, comment)
+
+        if (!comment)
+            redirect action: "startEdit", id: comment.id
+
+        render template:"/comment/commentTemplate", bean: comment, var: "comment", model:[objId:params.objId]
     }
 }

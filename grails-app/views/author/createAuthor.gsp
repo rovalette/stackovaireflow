@@ -8,12 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Steak Ovaire Flow</title>
     <meta name="layout" content="top">
 </head>
 
 <body>
-<h1 class="pagetitle">Register</h1>
+<h1 class="pagetitle"><g:message code="author.create" default="Create author"/></h1>
 
 <script type="application/javascript">
     function validatePassword()
@@ -36,41 +35,41 @@
     </g:if>
     <div class="content">
         <div class="centerform">
-    <div class="form-group">
-        <label for="firstname">Prénom</label>
-        <g:field type="text" class="form-control" name="firstname" required="" value="${author?.firstname}" placeholder="Prénom"/>
-    </div>
+            <div class="form-group">
+                <label for="firstname"><g:message code="author.firstname" default="First name"/></label>
+                <g:field type="text" class="form-control" name="firstname" required="" value="${author?.firstname}" placeholder="${message (code:'author.firstname', default:'First name')}"/>/>
+            </div>
 
-    <div class="form-group">
-        <label for="lastname">Nom</label>
-        <g:field type="text" class="form-control" name="lastname" required="" value="${author?.lastname}" placeholder="Nom"/>
-    </div>
+            <div class="form-group">
+                <label for="lastname"><g:message code="author.lastname" default="Last name"/></label>
+                <g:field type="text" class="form-control" name="lastname" required="" value="${author?.lastname}" placeholder="${message (code:'author.lastname', default:'Last name')}"/>
+            </div>
 
-    <div class="form-group">
-        <label for="email">Email</label>
-        <g:field type="text" class="form-control" name="email" required="" value="${author?.email}" placeholder="Email"/>
-    </div>
+            <div class="form-group">
+                <label for="email"><g:message code="author.email" default="Email"/></label>
+                <g:field type="text" class="form-control" name="email" required="" value="${author?.email}" placeholder="${message (code:'author.email', default:'Email')}"/>
+            </div>
 
-    <div class="form-group">
-        <label for="username">Pseudo</label>
-        <g:field type="text" class="form-control" name="username" required="" value="${author?.username}" placeholder="Pseudo"/>
-    </div>
+            <div class="form-group">
+                <label for="username"><g:message code="author.username" default="Username"/></label>
+                <g:field type="text" class="form-control" name="username" required="" value="${author?.username}" placeholder="${message (code:'author.username', default:'Username')}"/>
+            </div>
 
-    <div class="form-group">
-        <label for="password">Mot de passe</label>
-        <g:field type="password" class="form-control" name="password" required="" value="${author?.password}" placeholder="Password"/>
-    </div>
+            <div class="form-group">
+                <label for="password"><g:message code="author.password" default="Password"/></label>
+                <g:field type="password" class="form-control" name="password" required="" value="${author?.password}" placeholder="${message (code:'author.password', default:'Password')}"/>
+            </div>
 
-    <div class="form-group">
-        <label for="confirmPassword">Confirmer mot de passe</label>
-        <g:field type="password" class="form-control" name="confirmPassword" required="" placeholder="Password"/>
-    </div>
+            <div class="form-group">
+                <label for="confirmPassword"><g:message code="author.confirmpassword" default="Confirm Password"/></label>
+                <g:field type="password" class="form-control" name="confirmPassword" required="" placeholder="${message (code:'author.password', default:'Password')}"/>
+            </div>
 
-    <div class="btn-group">
-            <g:actionSubmit value="S'enregistrer" class="btn btn-primary" action="createAuthor"/>
-            <g:link class="btn btn-default" role="button" controller="author" action="displayIndex">Annuler</g:link>
-    </div>
-    </div>
+            <div class="btn-group">
+                    <g:actionSubmit value="${message (code:'author.signup', default:'Sign up')}" class="btn btn-primary" action="createAuthor"/>
+                    <g:link class="btn btn-default" role="button" controller="author" action="displayIndex"><g:message code="default.cancel" default="Cancel"/></g:link>
+            </div>
+        </div>
     </div>
 </g:form>
 </body>

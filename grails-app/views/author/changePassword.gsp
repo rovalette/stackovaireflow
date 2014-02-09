@@ -22,30 +22,30 @@
 </head>
 
 <body>
-<h1>Changer de mot de passe</h1>
+<h1><g:message code="author.changepassword" default="Change password"/></h1>
 <g:form name="editAuthor" role="form" controller="Author" onsubmit="return validatePassword()" class="form-horizontal" action="changePassword" method="post">
 
     <div class="content">
         <div class="centerform">
 
             <div class="form-group">
-                <label for="oldPassword">Ancien mot de passe</label>
-                <g:field type="password" class="form-control" name="oldPassword" required="" value="${oldPassword}" placeholder="Password"/>
+                <label for="oldPassword"><g:message code="author.oldpassword" default="Old password"/></label>
+                <g:field type="password" class="form-control" name="oldPassword" required="" value="${oldPassword}" placeholder="${message (code:'author.oldpassword', default:'Old password')}"/>
             </div>
 
             <div class="form-group">
-                <label for="newPassword">Nouveai mot de passe</label>
-                <g:field type="password" class="form-control" name="newPassword" id="newPassword" required="" value="${newPassword}" placeholder="Password"/>
+                <label for="newPassword"><g:message code="author.newpassword" default="New password"/></label>
+                <g:field type="password" class="form-control" name="newPassword" id="newPassword" required="" value="${newPassword}" placeholder="${message (code:'author.password', default:'Password')}"/>
             </div>
 
             <div class="form-group">
-                <label for="newCpassword">Confirmer mot de passe</label>
-                <g:field type="password" class="form-control" name="newCpassword" id="newCpassword" required="" placeholder="Password"/>
+                <label for="newCpassword"><g:message code="author.confirmpassword" default="Confirm password"/></label>
+                <g:field type="password" class="form-control" name="newCpassword" id="newCpassword" required="" placeholder="${message (code:'author.password', default:'Password')}"/>
             </div>
 
             <div class="btn-group">
-                <g:link class="btn btn-default" role="button" controller="author" action="displayIndex" params="[username: author?.username]">Annuler</g:link>
-                <g:actionSubmit value="Editer" class="btn btn-primary" onsubmit="return validatePassword()" action="changePassword"/>
+                <g:link class="btn btn-default" role="button" controller="author" action="displayIndex" params="[username: author?.username]"><g:message code="default.cancel" default="Cancel"/></g:link>
+                <g:actionSubmit value="${message (code:'author.edit', default:'Edit')}" class="btn btn-primary" onsubmit="return validatePassword()" action="changePassword"/>
             </div>
 
         </div>

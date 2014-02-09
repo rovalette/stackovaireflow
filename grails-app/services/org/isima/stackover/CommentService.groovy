@@ -99,9 +99,24 @@ class CommentService {
         }
     }
 
-    def update(Long id, Comment newComment)
+    def updateAnswerComment(Long id, CommentAnswer newComment)
     {
-        Comment commentInstance = Comment.get(id)
+        CommentAnswer commentInstance = CommentAnswer.get(id)
+
+        if(!commentInstance)
+            return null
+
+        commentInstance.content = newComment.content
+
+        if (!commentInstance.save())
+            return null
+
+        return commentInstance
+    }
+
+    def updateQuestionComment(Long id, CommentQuestion newComment)
+    {
+        CommentQuestion commentInstance = CommentQuestion.get(id)
 
         if(!commentInstance)
             return null

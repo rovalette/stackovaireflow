@@ -12,7 +12,7 @@
     <meta name="layout" content="top">
 </head>
 <body>
-<h1 class="pagetitle">Login</h1>
+<h1 class="pagetitle"><g:message code="author.login" default="Login"/></h1>
 
 <g:form name="signIn" role="form" controller="Author" class="form-horizontal" action="signIn" method="post">
     <g:if test="${flash.message}">
@@ -25,19 +25,19 @@
     <div class="content">
         <div class="centerform" style="padding-top: 15%">
             <div class="form-group">
-                <label for="username">Pseudo</label>
-                <g:field type="text" class="form-control" name="username" required="" value="${username}" placeholder="Pseudo"/>
+                <label for="username"><g:message code="author.username" default="Username"/></label>
+                <g:field type="text" class="form-control" name="username" required="" value="${username}" placeholder="${message (code:'author.username', default:'Username')}"/>
             </div>
 
             <div class="form-group">
-                <label for="password">Mot de passe</label>
-                <g:field type="password" class="form-control" name="password" required="" value="${password}" placeholder="Password"/>
+                <label for="password"><g:message code="author.password" default="Mot de passe"/></label>
+                <g:field type="password" class="form-control" name="password" required="" value="${password}" placeholder="${message (code:'author.password', default:'Password')}"/>
             </div>
 
             <div class="btn-group">
-                <g:link class="btn btn-danger" role="button" controller="author" action="displayCreateAuthor">Sign Up for free</g:link>
-                <g:actionSubmit class="btn btn-primary" value="Se connecter" action="signIn"/>
-                <g:link class="btn btn-default" role="button" controller="author" action="displayIndex">Annuler</g:link>
+                <g:link class="btn btn-danger" role="button" controller="author" action="displayCreateAuthor"><g:message code="author.signupforfree" default="Sign up for free"/></g:link>
+                <g:actionSubmit class="btn btn-primary" value="${message (code:'author.login', default:'Login')}" action="signIn"/>
+                <g:link class="btn btn-default" role="button" controller="author" action="displayIndex"><g:message code="default.cancel" default="Cancel"/></g:link>
             </div>
         </div>
     </div>

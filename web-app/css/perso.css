@@ -89,3 +89,20 @@ body{
     width: 30%;
     margin:auto;
 }
+
+textarea {
+    resize: none;
+    width:100%;
+    height:12%;
+}
+
+.actions{
+    margin-left : 5px;
+    float: left;
+    width: 75px;
+    height: 50px;
+}
+
+.score{
+    font-weight: bold;
+}

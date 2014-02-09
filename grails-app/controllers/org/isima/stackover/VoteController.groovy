@@ -17,6 +17,7 @@ class VoteController {
 
         if (!voteService.saveQuestionVote(v))
         {
+            flash.message = message(code: "vote.alreadyVoted", default: "Already voted!")
             return
         }
 

@@ -14,13 +14,19 @@
     <tbody>
     <g:each in="${questionInstanceList}" status="i" var="questionInstance">
         <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+            <td>
+                <g:link controller="question" action="show" id="${questionInstance.id}">
+                    ${fieldValue(bean: questionInstance, field: "title")}
+                </g:link>
+            </td>
 
-            <td><g:link controller="question" action="show" id="${questionInstance.id}">${fieldValue(bean: questionInstance, field: "title")}</g:link></td>
+            <td>
+                ${fieldValue(bean: questionInstance, field: "content")}
+            </td>
 
-            <td>${fieldValue(bean: questionInstance, field: "content")}</td>
-
-            <td><g:formatDate format="dd/MM/yyyy HH:mm" date="${questionInstance.date}" /></td>
-
+            <td>
+                <g:formatDate format="dd/MM/yyyy HH:mm" date="${questionInstance.date}" />
+            </td>
         </tr>
     </g:each>
     </tbody>

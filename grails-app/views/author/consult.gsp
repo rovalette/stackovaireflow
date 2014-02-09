@@ -23,7 +23,7 @@
 
         <div class="tab-content">
             <div class="tab-pane active" id="userStatsTab">
-               <p>Stats</p>
+               <p>NOT YET IMPLEMENTED</p>
             </div>
 
             <div class="tab-pane" id="questionsTab">
