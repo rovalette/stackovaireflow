@@ -33,7 +33,7 @@ environments {
             // for a database binding alias "mydb", system properties look like DATABASE_XXX_MYDB
             // see CloudBees SDK : "bees app:bind -a my-grails-application -db my-database -as mydb"
             // see http://wiki.cloudbees.com/bin/view/RUN/Resource+Management
-            url = "jdbc:postgresql:localhost:5432/stackovaireflow
+            url = "jdbc:postgresql:localhost:5432/stackovaireflow"
             username = 'postgres'
             password = 'root'
 
