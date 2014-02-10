@@ -23,7 +23,16 @@
 
         <div class="tab-content">
             <div class="tab-pane active" id="userStatsTab">
-               <p>NOT YET IMPLEMENTED</p>
+               <p><g:message code="author.nbquestion" default="Number of questions"/> : ${author.questions.size()}</p>
+                <p><g:message code="author.questionaveragenote" default="Question note average"/> : <g:formatNumber number="${questionsAverageNote}" type="number" format="###.##"/></p>
+                <p></p>
+                <p><g:message code="author.nbanswers" default="Number of answers"/> : ${author.answers.size()}</p>
+                <p><g:message code="author.answeraveragenote" default="Question note average"/> : <g:formatNumber number="${answersAverageNote}" type="number" format="###.##"/></p>
+                <p></p>
+                <p><g:message code="author.nbcomment" default="Number of Comments"/> : ${author.answerComments.size() + author.questionComments.size()}</p>
+                <p></p>
+                <p><g:message code="author.nbvotes" default="Number of votes"/> : ${author.questionVotes.size() + author.answerVotes.size()}</p>
+                <p><g:message code="author.voteaverage" default="The average mark"/> : <g:formatNumber number="${voteAverage}" type="number" format="###.##"/></p>
             </div>
 
             <div class="tab-pane" id="questionsTab">

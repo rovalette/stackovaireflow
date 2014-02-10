@@ -12,15 +12,23 @@
 </head>
 
 <body>
-<h1><g:message code="author.editprofile" default="Edit your profile"/></h1>
+
 <g:form name="editAuthor" role="form" controller="Author" class="form-horizontal" action="editAuthorInfo" method="post">
     
     <div class="content">
-        <g:link class="btn btn-default right" role="button" contrller="author" action="displayChangePassword">Change Password</g:link>
+        <h1 class="pagetitle"><g:message code="author.editprofile" default="Edit your profile"/></h1>
+        <g:link class="btn btn-default right" role="button" controller="author" action="displayChangePassword">
+            <g:message code="author.changepassword" default="Change Password"/>
+        </g:link>
         <div class="centerform">
             <div class="form-group">
                 <label for="username"><g:message code="author.username" default="Username"/></label>
-                <g:field type="text"  name="username" class="form-control" required="" value="${author?.username}" placeholder="${message (code:'author.username', default:'Username')}"/>
+                <g:field type="text"
+                         name="username"
+                         class="form-control"
+                         required=""
+                         value="${author?.username}"
+                         placeholder="${message (code:'author.username', default:'Username')}"/>
             </div>
 
             <div class="form-group">
@@ -39,7 +47,7 @@
             </div>
 
             <div class="btn-group">
-                <g:link class="btn btn-default" role="button" controller="author" action="displayIndex" params="[username: author?.username]"><g:message code="default.cancel" default="Cancel"/></g:link>
+                <g:link class="btn btn-default" role="button" controller="question" action="list"><g:message code="default.cancel" default="Cancel"/></g:link>
                 <g:actionSubmit value="${message (code:'author.edit', default:'Editer')}" class="btn btn-primary" action="editAuthorInfo"/>
             </div>
 

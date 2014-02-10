@@ -39,7 +39,7 @@
     </g:if>
     <g:else>
         <div id="score" class="score">
-            <g:message code="question.score" default="Socre"/> : ${score}
+            <g:message code="question.score" default="Score"/> : ${score}
         </div>
         <g:remoteLink action="startEdit"
                       id="${questionInstance?.id}"
@@ -80,6 +80,7 @@
                     <g:fieldValue bean="${t}" field="name"/>
                 </span>
             </g:link>
+            &nbsp;
         </g:each>
     </li>
 </g:if>

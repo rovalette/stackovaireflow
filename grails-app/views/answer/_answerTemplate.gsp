@@ -10,9 +10,9 @@
     <div id="content${a.id}">
         <div class="actions">
             <g:if test="${session["UserId"] && session["UserId"] != a.author.id}">
-                <g:remoteLink controller="Vote" action="addAnswerVote" id="${a.id}" params="[isPositive:true]" onFailure="alert('already voted!')" update="score${a.id}"> <span class="glyphicon glyphicon-thumbs-up"></span></g:remoteLink>
+                <g:remoteLink controller="Vote" action="addAnswerVote" id="${a.id}" params="[isPositive:true]" onFailure="alert('${message code:'vote.alreadyvoted', default:'Already voted!'}')" update="score${a.id}"> <span class="glyphicon glyphicon-thumbs-up"></span></g:remoteLink>
                 <div id="score${a.id}" class="score">${a.score}</div>
-                <g:remoteLink controller="Vote" action="addAnswerVote" id="${a.id}" params="[isPositive:false]" onFailure="alert('already voted!')" update="score${a.id}"><span class="glyphicon glyphicon-thumbs-down"></span></g:remoteLink>
+                <g:remoteLink controller="Vote" action="addAnswerVote" id="${a.id}" params="[isPositive:false]" onFailure="alert('${message code:'vote.alreadyvoted', default:'Already voted!'}')" update="score${a.id}"><span class="glyphicon glyphicon-thumbs-down"></span></g:remoteLink>
             </g:if>
             <g:else>
                 <div id="score" class="score">score : ${score}</div>

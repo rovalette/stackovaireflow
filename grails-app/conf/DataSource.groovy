@@ -26,16 +26,16 @@ environments {
         dataSource {
             pooled = true // one of 'create', 'create-drop', 'update', 'validate', ''
             dbCreate = "create-drop"
-            driverClassName = "com.mysql.jdbc.Driver"
-            dialect = 'org.hibernate.dialect.MySQL5InnoDBDialect'
+            driverClassName = "org.postgresql.Driver"
+            dialect = "org.hibernate.dialect.PostgreSQLDialect"
 
             // CLOUDBEES INJECTS BOUND DATABASES CONNECTION PARAMETERS WITH SYSTEM PROPERTIES
             // for a database binding alias "mydb", system properties look like DATABASE_XXX_MYDB
             // see CloudBees SDK : "bees app:bind -a my-grails-application -db my-database -as mydb"
             // see http://wiki.cloudbees.com/bin/view/RUN/Resource+Management
-            url = "jdbc:" + System.getProperty('DATABASE_URL_MYDB')
-            username = System.getProperty('DATABASE_USERNAME_MYDB')
-            password = System.getProperty('DATABASE_PASSWORD_MYDB')
+            url = "jdbc:postgresql:localhost:5432/stackovaireflow
+            username = 'postgres'
+            password = 'root'
 
             properties {
                 maxActive = 20

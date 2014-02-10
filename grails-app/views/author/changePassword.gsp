@@ -22,10 +22,11 @@
 </head>
 
 <body>
-<h1><g:message code="author.changepassword" default="Change password"/></h1>
 <g:form name="editAuthor" role="form" controller="Author" onsubmit="return validatePassword()" class="form-horizontal" action="changePassword" method="post">
 
     <div class="content">
+        <h1  class="pagetitle"><g:message code="author.changepassword" default="Change password"/></h1>
+
         <div class="centerform">
 
             <div class="form-group">
@@ -44,7 +45,7 @@
             </div>
 
             <div class="btn-group">
-                <g:link class="btn btn-default" role="button" controller="author" action="displayIndex" params="[username: author?.username]"><g:message code="default.cancel" default="Cancel"/></g:link>
+                <g:link class="btn btn-default" role="button" action="displayEditAuthorInfo"><g:message code="default.cancel" default="Cancel"/></g:link>
                 <g:actionSubmit value="${message (code:'author.edit', default:'Edit')}" class="btn btn-primary" onsubmit="return validatePassword()" action="changePassword"/>
             </div>
 

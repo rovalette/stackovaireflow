@@ -17,7 +17,7 @@
 #headband{
     background-color: #444;
     height: 10%;
-    min-height: 70px;
+    min-height: 100px;
 }
 
 .pagetitle{
@@ -28,6 +28,7 @@
 .content{
     width:90%;
     margin: auto;
+    padding: 20px;
     background-color: #ffffff;
     min-height: 70%;
 }
@@ -87,6 +88,7 @@ body{
 
 .centerForm{
     width: 30%;
+    min-width: 420px;
     margin:auto;
 }
 
@@ -105,4 +107,13 @@ textarea {
 
 .score{
     font-weight: bold;
+}
+
+.btn{
+    margin: 5px;
+}
+
+.btn-group .btn
+{
+    margin:0;
 }

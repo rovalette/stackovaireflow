@@ -33,14 +33,25 @@ class AuthorController {
     }
 
     def consult(){
+        if (!session["UserId"])
+        {
+            redirect(action: "index")
+            return
+        }
+
         Author author = authorService.getAuthorById(session["UserId"])
+        Float questionsAverageNote, answersAverageNote, voteAverage
+
+        questionsAverageNote = authorService.getAverageQuestionNote(author)
+        answersAverageNote = authorService.getAverageAnswerNote(author)
+        voteAverage = authorService.getVoteAverage(author)
 
         if(!author)
         {
             render view: "login"
         }
 
-        [author: author]
+        [author: author, questionsAverageNote:questionsAverageNote, answersAverageNote:answersAverageNote, voteAverage:voteAverage ]
     }
 
     def createAuthor()

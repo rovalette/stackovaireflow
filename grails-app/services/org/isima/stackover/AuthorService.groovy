@@ -4,6 +4,8 @@ import cr.co.arquetipos.password.PasswordTools
 
 class AuthorService {
 
+    def questionService
+
     def Boolean createAuthor(Author author)
     {
         if (userExists(author.username).equals(false))
@@ -60,5 +62,52 @@ class AuthorService {
         if (PasswordTools.checkDigestBase64(password, user.password))
             return user
         return null
+    }
+
+    def getAverageQuestionNote(Author author)
+    {
+        int score = 0
+        int cpt = 0
+        for(Question q : author.questions)
+        {
+            score += questionService.getScore(q)
+            ++cpt
+        }
+
+        return (Float) score/cpt
+    }
+
+    def getAverageAnswerNote(Author author)
+    {
+        int score = 0
+        int cpt = 0
+        for(Answer a : author.answers)
+        {
+            score += (a.score)
+            ++cpt
+        }
+
+        return (Float) score/cpt
+    }
+
+    def getVoteAverage(Author author)
+    {
+        int score = 0
+        int cpt = 0
+
+        for(QuestionVote v : author.questionVotes)
+        {
+            score += (v.isPositive?1:-1)
+            ++cpt
+        }
+
+        for(AnswerVote v : author.answerVotes)
+        {
+            score += (v.isPositive?1:-1)
+            ++cpt
+        }
+
+
+        return (Float) score/cpt
     }
 }

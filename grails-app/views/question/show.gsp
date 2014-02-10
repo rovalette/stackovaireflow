@@ -27,7 +27,7 @@
                     </span>
                     <ul id="answers" class="answers">
                         <g:render template="/answer/answerTemplate"
-                                  collection="${questionInstance.answers.sort{it.date}}"
+                                  collection="${questionInstance.answers.sort{it.score}}"
                                   var="a" />
                     </ul>
                 </li>
@@ -39,7 +39,7 @@
                               update="answers"
                               onComplete="jQuery('#newAnswer').val('')">
                     <input type="hidden" id="qid" name="qid" value="${questionInstance.id}" />
-                    <g:textArea id="newAnswer" name="content" required="" placeholder="Your answer"/>
+                    <g:textArea id="newAnswer" name="content" required="" placeholder="${message(code:"answer.content.label", default:"Your answer")}"/>
                     <input type="submit" class="btn btn-primary btn-xs" value="${message(code:"answer.create", default:"Answer this question")}" />
                 </g:formRemote >
             </g:if>

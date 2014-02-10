@@ -23,7 +23,7 @@
 
 <body>
 <div id="headband" class="nav-header">
-    <h1 class="center" style="width: 300px">StackOvaire${resource(dir:'/img', file:'favico.png')}</h1>
+    <h1 class="center" style="color : white; width:255px">StackOvaire<img src="${resource(dir:'/images', file:'favico.png')}" style="width:60px"/></h1>
     <g:link class="btn btn-default" role="button" controller="question" action="list"><g:message code="default.home.label"/></g:link>
     <g:link class="btn btn-default" role="button" controller="tag" action="list"><g:message code="tags.label" default="Tags"/></g:link>
     <g:if test="${session["UserId"]}">
