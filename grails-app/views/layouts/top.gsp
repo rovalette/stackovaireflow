@@ -26,6 +26,7 @@
     <h1 class="center" style="color : white; width:255px">StackOvaire<img src="${resource(dir:'/images', file:'favico.png')}" style="width:60px"/></h1>
     <g:link class="btn btn-default" role="button" controller="question" action="list"><g:message code="default.home.label"/></g:link>
     <g:link class="btn btn-default" role="button" controller="tag" action="list"><g:message code="tags.label" default="Tags"/></g:link>
+    <g:link class="btn btn-default" role="button" controller="author" action="list"><g:message code="authors.label" default="Authors"/></g:link>
     <g:if test="${session["UserId"]}">
         <g:link class="btn btn-default" role="button" controller="question" action="create"><g:message code="question.askquestion" default="Ask Question"/></g:link>
         <g:link class="btn btn-primary right" role="button" controller="Author" action="consult"><g:message code="author.consultprofile" default="Profile"/></g:link>
@@ -34,6 +35,7 @@
     <g:else>
         <g:link class="btn btn-default right" role="button" controller="Author" action="index"><g:message code="topBar.login" default="Sign in"/></g:link>
         <g:link class="btn btn-primary right" role="button" controller="Author" action="displayCreateAuthor"><g:message code="topBar.signup" default="Sign up"/></g:link>
+
     </g:else>
 </div>
 

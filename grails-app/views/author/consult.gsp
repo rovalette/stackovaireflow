@@ -18,7 +18,7 @@
             <li><a href="#questionsTab" data-toggle="tab"><g:message code="author.questions" default="Your Questions"/></a></li>
             <li><a href="#answersTab" data-toggle="tab"><g:message code="author.answers" default="Your Answers"/></a></li>
             <li><a href="#commentsTab" data-toggle="tab"><g:message code="author.comments" default="Your comments"/></a></li>
-            <li><g:link controller="author" action="displayEditAuthorInfo"><g:message code="author.editprofile"/></g:link></li>
+            <g:if test="${isMe == true}"><li><g:link controller="author" action="displayEditAuthorInfo"><g:message code="author.editprofile"/></g:link></li></g:if>
         </ul>
 
         <div class="tab-content">

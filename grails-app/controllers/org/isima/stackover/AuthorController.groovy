@@ -33,13 +33,28 @@ class AuthorController {
     }
 
     def consult(){
-        if (!session["UserId"])
-        {
-            redirect(action: "index")
-            return
+        Long authorId
+        Boolean isMe
+
+        if (params.id){
+            authorId = Long.parseLong(params.id)
+            isMe = false
+        }
+        else {
+            if (session["UserId"])
+            {
+                authorId = session["UserId"]
+                isMe = true
+            }
+            else
+            {
+                redirect(action: "index")
+                return
+            }
         }
 
-        Author author = authorService.getAuthorById(session["UserId"])
+
+        Author author = authorService.getAuthorById(authorId)
         Float questionsAverageNote, answersAverageNote, voteAverage
 
         questionsAverageNote = authorService.getAverageQuestionNote(author)
@@ -51,7 +66,12 @@ class AuthorController {
             render view: "login"
         }
 
-        [author: author, questionsAverageNote:questionsAverageNote, answersAverageNote:answersAverageNote, voteAverage:voteAverage ]
+        [author: author, questionsAverageNote:questionsAverageNote, answersAverageNote:answersAverageNote, voteAverage:voteAverage, isMe:isMe ]
+    }
+
+    def list()
+    {
+        [authorList:authorService.findAll()]
     }
 
     def createAuthor()

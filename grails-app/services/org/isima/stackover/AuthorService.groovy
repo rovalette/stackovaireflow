@@ -23,6 +23,11 @@ class AuthorService {
         return !Author.findAllByUsername(username).empty
     }
 
+    def findAll()
+    {
+        return Author.findAll()
+    }
+
     def Boolean editAuthorInfo(Author newAuthor, Long uid)
     {
         if (newAuthor.username != "" && newAuthor.firstname != "" && newAuthor.lastname != "" && newAuthor.email != "")
