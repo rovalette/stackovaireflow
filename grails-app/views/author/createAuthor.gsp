@@ -37,7 +37,7 @@
         <div class="centerform">
             <div class="form-group">
                 <label for="firstname"><g:message code="author.firstname" default="First name"/></label>
-                <g:field type="text" class="form-control" name="firstname" required="" value="${author?.firstname}" placeholder="${message (code:'author.firstname', default:'First name')}"/>/>
+                <g:field type="text" class="form-control" name="firstname" required="" value="${author?.firstname}" placeholder="${message (code:'author.firstname', default:'First name')}"/>
             </div>
 
             <div class="form-group">
