@@ -74,7 +74,7 @@ class AuthorService {
             ++cpt
         }
 
-        return (Float) score/cpt
+        return (Float) (cpt>0?score/cpt:0)
     }
 
     def getAverageAnswerNote(Author author)
@@ -87,7 +87,7 @@ class AuthorService {
             ++cpt
         }
 
-        return (Float) score/cpt
+        return (Float) (cpt>0?score/cpt:0)
     }
 
     def getVoteAverage(Author author)
@@ -108,6 +108,6 @@ class AuthorService {
         }
 
 
-        return (Float) score/cpt
+        return (Float) (cpt>0?score/cpt:0)
     }
 }
