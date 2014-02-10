@@ -65,7 +65,8 @@
         <span class="property-value" aria-labelledby="date-label">
             <g:message code="answer.the" default="The"/>
             <g:formatDate date="${questionInstance?.date}" format="dd/MM/yyyy HH:ss"/>
-            <g:message code="answer.by" default="By"/> ${questionInstance.author.username}
+            <g:message code="answer.by" default="By"/>
+            <g:link controller="author" action="consult" id="${questionInstance?.author?.id}"><g:fieldValue bean="${questionInstance?.author}" field="username"/></g:link>
         </span>
     </li>
 </g:if>

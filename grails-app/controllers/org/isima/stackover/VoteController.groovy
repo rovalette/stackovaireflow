@@ -34,6 +34,7 @@ class VoteController {
     def addAnswerVote()
     {
         Answer a = Answer.get(params.id)
+        Question q = Question.get(params.qid)
         AnswerVote v = new AnswerVote(params)
 
         v.author = Author.get(session["UserId"])
@@ -53,6 +54,6 @@ class VoteController {
         a.votes.add(v)
         answerService.updateScore(a, v)
         a.save(flush:true)
-        render a.score
+        render template: "/answer/answerTemplate", collection: q.answers.sort{x,y -> y.chosen <=> x.chosen}, var: "a", model: [questionInstance: q, qid: q.id]
     }
 }

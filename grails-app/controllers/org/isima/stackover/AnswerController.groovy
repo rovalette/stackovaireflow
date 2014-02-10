@@ -34,7 +34,7 @@ class AnswerController {
             return
         }
 
-        render template: "/answer/answerTemplate", collection: answerInstance.question.answers.sort{it.date}, var: "a"
+        render template: "/answer/answerTemplate", collection: answerInstance.question.answers.sort{x,y -> y.chosen <=> x.chosen}, var: "a", model:[questionInstance:Question.get(qid), qid:params.qid]
     }
 
     def show(Long id) {
@@ -83,13 +83,13 @@ class AnswerController {
             return
         }
 
-        render template:"/answer/answerTemplate", collection: questionInstance.answers.sort{it.date}, var: "a"
+        render template:"/answer/answerTemplate", collection: questionInstance.answers.sort{x,y -> y.chosen <=> x.chosen}, var: "a", model:[questionInstance: questionInstance, qid: questionInstance.id]
     }
 
     def startEdit()
     {
         Answer answerInstance = Answer.get(params.id)
-        render template: "/answer/form", bean: answerInstance, var: "a"
+        render template: "/answer/form", bean: answerInstance, var: "a", model:[qid: params.qid]
     }
 
     def endEdit()
@@ -103,6 +103,26 @@ class AnswerController {
         if (!answerInstance)
             redirect action: "startEdit", id: answerInstance.id
 
-        render template:"/answer/answerTemplate", bean: answerInstance, var: "a"
+        render template:"/answer/answerTemplate", bean: answerInstance, var: "a", model: [questionInstance: Question.get(params.qid), qid: params.qid]
+    }
+
+    def chooseAnswer()
+    {
+        Question q = Question.get(Long.parseLong(params.qid))
+        Answer oldChosen = q.chosenAnswer
+        Answer newChosen = answerService.get(Long.parseLong(params.id))
+
+        if (oldChosen){
+            oldChosen.chosen = false
+            oldChosen.save(flush: true)
+        }
+
+        q.chosenAnswer = newChosen
+        q.save(flush:true)
+
+        newChosen.chosen = true
+        newChosen.save(flush: true)
+
+        render template: "answerTemplate", collection: q.answers.sort{x,y -> y.chosen <=> x.chosen}, var: "a", model: [questionInstance: q, qid: q.id]
     }
 }

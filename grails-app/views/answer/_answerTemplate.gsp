@@ -6,41 +6,86 @@
 --%>
 
 
-<li id="answer${a.id}" class="answer">
-    <div id="content${a.id}">
+<li id="answer${a?.id}" class="answer">
+    <div id="content${a?.id}">
         <div class="actions">
-            <g:if test="${session["UserId"] && session["UserId"] != a.author.id}">
-                <g:remoteLink controller="Vote" action="addAnswerVote" id="${a.id}" params="[isPositive:true]" onFailure="alert('${message code:'vote.alreadyvoted', default:'Already voted!'}')" update="score${a.id}"> <span class="glyphicon glyphicon-thumbs-up"></span></g:remoteLink>
-                <div id="score${a.id}" class="score">${a.score}</div>
-                <g:remoteLink controller="Vote" action="addAnswerVote" id="${a.id}" params="[isPositive:false]" onFailure="alert('${message code:'vote.alreadyvoted', default:'Already voted!'}')" update="score${a.id}"><span class="glyphicon glyphicon-thumbs-down"></span></g:remoteLink>
+            <g:if test="${session["UserId"] && session["UserId"] != a?.author?.id}">
+                <g:remoteLink controller="Vote"
+                              action="addAnswerVote"
+                              id="${a?.id}"
+                              params="[isPositive:true, questionInstance:questionInstance, qid: qid]"
+                              onFailure="alert('${message code:'vote.alreadyvoted', default:'Already voted!'}')"
+                              update="answers">
+                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                </g:remoteLink>
+                <div id="score${a?.id}" class="score">${a?.score}</div>
+                <g:remoteLink controller="Vote"
+                              action="addAnswerVote"
+                              id="${a?.id}"
+                              params="[isPositive:false, questionInstance:questionInstance, qid: qid]"
+                              onFailure="alert('${message code:'vote.alreadyvoted', default:'Already voted!'}')"
+                              update="answers">
+                    <span class="glyphicon glyphicon-thumbs-down"></span>
+                </g:remoteLink>
             </g:if>
             <g:else>
-                <div id="score" class="score">score : ${score}</div>
+                <div id="score" class="score">score : ${a?.score}</div>
                 <div class="icon left">
-                    <g:remoteLink controller="answer" action="delete" id="${a.id}" update="answers"><span class="glyphicon glyphicon-trash"></span></g:remoteLink>
-                    <p></p>
-                    <g:remoteLink controller="answer" action="startEdit" id="${a?.id}" update="content${a?.id}" class="left"><span class="glyphicon glyphicon-pencil"></span></g:remoteLink>
+                    <g:remoteLink controller="answer"
+                                  action="delete"
+                                  id="${a?.id}"
+                                  update="answers">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </g:remoteLink>
+                    <g:remoteLink controller="answer"
+                                  action="startEdit"
+                                  id="${a?.id}"
+                                  update="content${a?.id}"
+                                  class="left">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </g:remoteLink>
                 </div>
             </g:else>
+            <g:if test="${!a?.chosen && session["UserId"] == questionInstance?.author?.id}">
+                <g:remoteLink controller="answer"
+                              action="chooseAnswer"
+                              id="${a?.id}"
+                              params="[questionInstance: questionInstance, qid: qid]"
+                              update="answers">choose</g:remoteLink>
+            </g:if>
+            <g:if test="${a?.chosen}">
+                <span class="glyphicon glyphicon-ok"></span>
+            </g:if>
         </div>
         <p><g:fieldValue bean="${a}" field="content"/></p>
         <p><span class="metadata">
             <g:message code="answer.by" default="by"/>
-            <g:fieldValue bean="${a?.author}" field="username"/>
-            <g:formatDate format="dd/MM/yyyy HH:mm" date="${a.date}"/>
+            <g:formatDate format="dd/MM/yyyy HH:mm" date="${a?.date}"/>
+            <g:link controller="author" action="consult" id="${a?.author?.id}"><g:fieldValue bean="${a?.author}" field="username"/></g:link>
         </span></p>
     </div>
     <span id="comment-label" class="property-label"><g:message code="answers.comments.label" default="Comments" /></span>
     <ul id="commentsAnswer${a?.id}" class="comments">
-        <g:render template="/comment/commentTemplate" collection="${a?.comments?.sort{it.date}}" var="comment" model="[objId: a.id]"/>
+        <g:render template="/comment/commentTemplate" collection="${a?.comments?.sort{it.date}}" var="comment" model="[objId: a?.id]"/>
     </ul>
     <g:if test="${session["UserId"]}">
         <a onclick="$('#addComment${a?.id}').show()"><g:message code="comments.add" default="Add comment"/></a>
-        <g:formRemote style="display:none" name="addComment${a?.id}" url="[controller :'Comment', action:'saveAnswerComment']" update="commentsAnswer${a.id}" onComplete="jQuery('#addComment${a.id}').val='';jQuery('#addComment${a.id}').hide()">
+        <g:formRemote style="display:none"
+                      name="addComment${a?.id}"
+                      url="[controller :'Comment', action:'saveAnswerComment']"
+                      update="commentsAnswer${a?.id}"
+                      onComplete="jQuery('#addComment${a?.id}').val='';jQuery('#addComment${a?.id}').hide()">
             <input type="hidden" id="objId" name="objId" value="${a?.id}" />
             <g:textArea id="newComment${a?.id}" name="content" required="" placeholder="Your answer"/>
             <input type="submit" class="btn btn-primary btn-xs" value="${message(code:"comment.create", default:"Leave this comment")}" />
-            <g:remoteLink controller="comment" class="btn btn-default btn-xs" action="saveAnswerComment" id="${a.id}" params="[cancel:true, objId: a.id]" update="commentsAnswer${a.id}" onComplete="jQuery('#addComment${a.id}').val='';jQuery('#addComment${a.id}').hide()"><g:message code="default.cancel" default="Cancel"/></g:remoteLink>
+            <g:remoteLink controller="comment"
+                          class="btn btn-default btn-xs"
+                          action="saveAnswerComment" id="${a?.id}"
+                          params="[cancel:true, objId: a?.id]"
+                          update="commentsAnswer${a?.id}"
+                          onComplete="jQuery('#addComment${a?.id}').val='';jQuery('#addComment${a?.id}').hide()">
+                <g:message code="default.cancel" default="Cancel"/>
+            </g:remoteLink>
         </g:formRemote>
 
     </g:if>

@@ -19,6 +19,8 @@ class VoteService {
             if (vote.author.equals(v.author))
                 return false
 
-        v.save(flush: true)
+        if (!v.save(flush: true))
+            return false
+        return true
     }
 }

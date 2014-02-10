@@ -5,6 +5,7 @@ class Answer {
 	
 	String content
 	Date date
+    Boolean chosen = false
     int score = 0
 	
 	static belongsTo = [question:Question, author:Author]

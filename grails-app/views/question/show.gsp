@@ -27,8 +27,9 @@
                     </span>
                     <ul id="answers" class="answers">
                         <g:render template="/answer/answerTemplate"
-                                  collection="${questionInstance.answers.sort{it.score}}"
-                                  var="a" />
+                                  collection="${questionInstance.answers.sort{x,y -> y.chosen <=> x.chosen}}"
+                                  var="a"
+                                  model="[questionInstance: questionInstance, qid: questionInstance.id]"/>
                     </ul>
                 </li>
             </ul>

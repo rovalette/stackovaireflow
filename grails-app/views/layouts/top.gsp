@@ -35,7 +35,6 @@
     <g:else>
         <g:link class="btn btn-default right" role="button" controller="Author" action="index"><g:message code="topBar.login" default="Sign in"/></g:link>
         <g:link class="btn btn-primary right" role="button" controller="Author" action="displayCreateAuthor"><g:message code="topBar.signup" default="Sign up"/></g:link>
-
     </g:else>
 </div>
 

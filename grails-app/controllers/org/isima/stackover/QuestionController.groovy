@@ -33,6 +33,7 @@ class QuestionController {
 
         if (!questionService.save(questionInstance, params.tagList))
         {
+            flash.message = message(default: "PROBLEM!")
             render(view: "create", model: [questionInstance: questionInstance, tagList: params.tagList])
             return
         }
